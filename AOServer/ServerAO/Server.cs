@@ -17,6 +17,7 @@ namespace AOServer.ServerAO
 
 
         static TcpListener server = null;
+
         static int userCount = 0;
 
         //TO-DO: Make config file to store these:

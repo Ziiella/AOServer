@@ -10,11 +10,15 @@ namespace AOServer.ServerAO
     {
         public static List<string> Chars = new List<string>();
         public static List<string> Music = new List<string>();
+        public static string ServerName = "Server";
+        public static string MOTD = "=== MOTD ===\r\n{}\r\n=============";
+        public static int PlayerLimit;
         public static string CharPacket;
         public static string MusicPacket;
 
         public static void InitConfig()
         {
+            PlayerLimit = 20;
             AddChars();
             AddMusic();
         }

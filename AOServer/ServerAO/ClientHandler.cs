@@ -29,6 +29,7 @@ namespace AOServer.ServerAO
 
                 case "RD":
                     SendRawMessage(stream, "DONE#%");
+                    SendRawMessage(stream, $"CT#{Config.ServerName}#{Config.MOTD}#%");
                     break;
 
                 case "CC":
