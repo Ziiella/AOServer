@@ -10,6 +10,7 @@ namespace AOServer
     class AOProtocol
     {
 
+
         public static void data_received(string buffer, Client c)
         {
             /*Handles any data received from the network.

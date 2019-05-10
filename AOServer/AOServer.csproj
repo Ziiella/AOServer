@@ -47,7 +47,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerAO\Data\AreaManager.cs" />
-    <Compile Include="ServerAO\ClientHandler.cs" />
     <Compile Include="ServerAO\Config.cs" />
     <Compile Include="ServerAO\Data\ClientManager.cs" />
     <Compile Include="ServerAO\Server.cs" />

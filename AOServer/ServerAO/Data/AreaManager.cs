@@ -11,7 +11,7 @@ namespace AOServer.ServerAO.Data
     {
         public class Area
         {
-            List<Client> clients;
+            public List<Client> clients;
             public int id;
             public string name;
             public string background;
@@ -32,10 +32,10 @@ namespace AOServer.ServerAO.Data
             //self.recorded_messages = []
             //self.evidence_mod = evidence_mod  
             string current_music;         
-            bool owned;
-            bool is_locked;
-            bool is_gmlocked;
-            bool is_modlocked;
+            public bool owned;
+            public bool is_locked;
+            public bool is_gmlocked;
+            public bool is_modlocked;
 
             public Area(int area_id, string name, string background, bool bg_lock = false)
             {

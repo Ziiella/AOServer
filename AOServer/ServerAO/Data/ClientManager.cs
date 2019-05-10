@@ -132,7 +132,8 @@ namespace AOServer.ServerAO.Data
 
             public void send_host_message(string msg)
             {
-
+                string[] args = new string[] { $"{Config.ServerName}", msg };
+                send_command("CT", args);
             }
 
             public void send_motd()
@@ -218,6 +219,43 @@ namespace AOServer.ServerAO.Data
 
             public void send_area_list()
             {
+                string msg = "=== Areas ===";
+                int i = 0;
+                Dictionary<bool, string> aLock = new Dictionary<bool, string> { { true, "[LOCKED]" }, { false, "" } };
+
+                foreach (var area in AreaManager.areas)
+                {
+                    Console.WriteLine("meow");
+                    i++;
+                    bool locked = false;
+                    string owner = "FREE";
+
+                    if (area.owned)
+                    {
+                        foreach (var client in area.clients)
+                        {
+                            if (client.is_cm)
+                            {
+                                owner = $"MASTER: {client.get_char_name()}";
+                                break;
+                            }
+                        }
+                        if (area.is_gmlocked || area.is_modlocked || area.is_locked)
+                        {
+                            locked = true;
+                        }
+                        else
+                        {
+                            locked = false;
+                        }
+                    }
+                    msg += $"\r\nArea {i}: {area.name} (users: {area.clients.Count}) {aLock[locked]}";
+                    if (this.area == area)
+                        msg += " [*]";
+
+                }
+
+                send_host_message(msg);
 
             }
 
@@ -371,7 +409,7 @@ namespace AOServer.ServerAO.Data
         public static void clientLoop(object _transport)
         {
             Client c = (Client)_transport;
-            while (true)
+            while (c.transport.isConnected())
             {
                 string buffer = c.transport.Read();
                 if (buffer != null)
@@ -379,7 +417,10 @@ namespace AOServer.ServerAO.Data
                     AOProtocol.data_received(buffer, c);
                 }
             }
-
+            c.disconnect();
+            c.area.remove_client(c);
+            remove_client(c);
+            Console.WriteLine("User has disconnected.");
         }
 
 

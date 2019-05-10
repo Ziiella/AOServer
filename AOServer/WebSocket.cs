@@ -23,6 +23,21 @@ namespace AOServer
 
         }
 
+        public bool isConnected()
+        {
+            if (client.Client.Poll(0, SelectMode.SelectRead))
+            {
+                byte[] buff = new byte[1];
+                if (client.Client.Receive(buff, SocketFlags.Peek) == 0)
+                {
+                    // Client disconnected
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public void Close()
         {
             stream.Close();
