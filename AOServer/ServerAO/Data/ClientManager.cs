@@ -12,17 +12,17 @@ namespace AOServer.ServerAO.Data
         public class Client
         {
 
-            public Area area;
+            public AreaManager area;
             string hdid = "";
             bool pm_mute = false;
             int char_id = -1;
             int ipid;
             //self.id = user_id
-            NetworkStream transport;
+            WebSocket transport;
             //Area area = server.area_manager.default_area()
             //self.evi_list = []
             //self.server = server
-            string name = "";
+            public string name = "";
             string fake_name = "";
             bool is_mod = false;
             bool is_gm = false;
@@ -47,23 +47,23 @@ namespace AOServer.ServerAO.Data
             int mute_time = 0;
 
 
-            public Client(NetworkStream transport, int ipid)
+            public Client(WebSocket transport, int ipid)
             {
                 this.transport = transport;
                 this.ipid = ipid;
             }
 
             public void send_raw_message(string msg)
-        {
-            Console.WriteLine($"Sending raw response: [{msg}]");
-            transport.Write(Encoding.UTF8.GetBytes(msg), 0, 1024);
-        }
+            {
+                Console.WriteLine($"Sending raw response: [{msg}]");
+                transport.Write(Encoding.UTF8.GetBytes(msg), 0, 1024);
+            }
 
             public void send_command(string command, string[] args)
             {
                 if (args != null)
                 {
-                    if(command == "MS")
+                    if (command == "MS")
                     {
                         //        for evi_num in range(len(self.evi_list)):
                         //            if self.evi_list[evi_num] == args[11]:
@@ -72,12 +72,17 @@ namespace AOServer.ServerAO.Data
                         //                args = tuple(lst)
                         //                break;
                     }
-                    //send_raw_message('{}#{}#%'.format(command, '#'.join([str(x) for x in args])))
+
+                    string msg = "";
+                    for (int i = 0; i < args.Length; i++) { msg += $"{args[i]}#"; }
+
+                    send_raw_message($"{command}#{msg}%");
                 }
                 else
                 {
                     send_raw_message($"{command}#%");
                 }
+
             }
 
             public void send_host_message(string msg)
@@ -116,7 +121,7 @@ namespace AOServer.ServerAO.Data
 
             }
 
-            public void change_area(Area area)
+            public void change_area(AreaManager area)
             {
 
             }
@@ -131,7 +136,7 @@ namespace AOServer.ServerAO.Data
 
             }
 
-            public void follow_area(Area area)
+            public void follow_area(AreaManager area)
             {
 
             }
@@ -243,13 +248,12 @@ namespace AOServer.ServerAO.Data
 
         public static List<Client> clients_list = new List<Client>();
 
-        public static void new_client(NetworkStream transport)
+        public static void new_client(WebSocket transport)
         {
             int cur_id = 0;
-
             Client c = new Client(transport, 0000);
             clients_list.Add(c);
-
+            Console.WriteLine("Client connected!");
         }
 
         public static void remove_client(Client client)

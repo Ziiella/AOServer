@@ -4,22 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AOServer.ServerAO.Data;
+using System.Net.Sockets;
+using System.Net;
 
 namespace AOServer.ServerAO
 {
     class Config
     {
-        public static string ServerName = "Server";
+        public static int port = 27015;
+        public static IPAddress ipAdr = IPAddress.Parse("10.0.0.45");
+        public static string ServerName { get; set; } = "Server";
         public static string MOTD = "=== MOTD ===\r\n{}\r\n=============";
         public static int PlayerLimit { get; set; }
 
         public static List<string> Chars = new List<string>();
         public static List<string> Music = new List<string>();
-        public static List<Area> Areas = new List<Area>();
+        public static List<AreaManager> Areas = new List<AreaManager>();
 
 
 
-        public static void InitConfig()
+        public static void Init()
         {
             PlayerLimit = 20;
             AddChars();
@@ -41,6 +45,32 @@ namespace AOServer.ServerAO
 
 
 
+        public static void load_iniswaps()
+        {
+
+        }
+
+
+        public static void load_backgrounds()
+        {
+
+        }
+
+
+        public static void build_char_pages_ao1()
+        {
+
+        }
+
+        public static void build_music_pages_ao1()
+        {
+
+        }
+
+        public static void build_music_list_ao2()
+        {
+
+        }
 
     }
 }
