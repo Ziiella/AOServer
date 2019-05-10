@@ -43,7 +43,6 @@ namespace AOServer.ServerAO
         //self.stats_manager = Database(self)
         //self.district_client = None
         //self.ms_client = None
-        bool rp_mode = false;
         bool runner = true;
         long runtime = 0;
         //logger.setup_logger(debug=self.config['debug'], log_size=self.config['log_size'],

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Net.Sockets;
 
 namespace AOServer.ServerAO.Data
@@ -12,13 +12,13 @@ namespace AOServer.ServerAO.Data
         public class Client
         {
 
-            public AreaManager area;
+            public AreaManager area = null;
             string hdid = "";
             bool pm_mute = false;
             int char_id = -1;
             int ipid;
-            //self.id = user_id
-            WebSocket transport;
+            int id;
+            public WebSocket transport;
             //Area area = server.area_manager.default_area()
             //self.evi_list = []
             //self.server = server
@@ -47,19 +47,20 @@ namespace AOServer.ServerAO.Data
             int mute_time = 0;
 
 
-            public Client(WebSocket transport, int ipid)
+            public Client(WebSocket transport, int ipid, int user_id)
             {
                 this.transport = transport;
                 this.ipid = ipid;
+                id = user_id;
             }
 
             public void send_raw_message(string msg)
             {
                 Console.WriteLine($"Sending raw response: [{msg}]");
-                transport.Write(Encoding.UTF8.GetBytes(msg), 0, 1024);
+                transport.Write(Encoding.UTF8.GetBytes(msg));
             }
 
-            public void send_command(string command, string[] args)
+            public void send_command(string command, string[] args = null)
             {
                 if (args != null)
                 {
@@ -77,6 +78,34 @@ namespace AOServer.ServerAO.Data
                     for (int i = 0; i < args.Length; i++) { msg += $"{args[i]}#"; }
 
                     send_raw_message($"{command}#{msg}%");
+                    Console.WriteLine($"{command}#{msg}%");
+                }
+                else
+                {
+                    send_raw_message($"{command}#%");
+                }
+
+            }
+
+            public void send_command(string command, List<string> args)
+            {
+                if (args != null)
+                {
+                    if (command == "MS")
+                    {
+                        //        for evi_num in range(len(self.evi_list)):
+                        //            if self.evi_list[evi_num] == args[11]:
+                        //                lst = list(args)
+                        //                lst[11] = evi_num
+                        //                args = tuple(lst)
+                        //                break;
+                    }
+
+                    string msg = "";
+                    for (int i = 0; i < args.Count; i++) { msg += $"{args[i]}#"; }
+
+                    send_raw_message($"{command}#{msg}%");
+                    Console.WriteLine($"{command}#{msg}%");
                 }
                 else
                 {
@@ -108,7 +137,37 @@ namespace AOServer.ServerAO.Data
 
             public void change_character(int char_id, bool force = false)
             {
+                if (!Server.is_valid_char_id(char_id))
+                {
+                    //raise ClientError('Invalid Character ID.')
+                }
 
+                //if (!area.is_char_available(char_id))
+                //{
+                //    if(this.char_id != char_id)
+                //    {
+                //        if (force)
+                //        {
+                //            //for client in self.area.clients:
+                //            //    if client.char_id == char_id:
+                //            //        client.char_select()
+                //        }
+                //        else
+                //        {
+                //            //raise ClientError('Character not available.')
+                //        }
+                //    }
+                //}  
+
+                string old_char = get_char_name();
+                this.char_id = char_id;
+                pos = "";
+                string[] args;
+
+                args = new string[]{ $"{id}", "CID", $"{char_id}" };
+                send_command("PV", args);
+                //            logger.log_server('[{}]Changed character from {} to {}.'
+                //                              .format(self.area.id, old_char, self.get_char_name()), self)
             }
 
             public void change_music_cd()
@@ -174,6 +233,19 @@ namespace AOServer.ServerAO.Data
             public void send_done()
             {
 
+                //avail_char_ids = set(range(len(self.server.char_list))) - set([x.char_id for x in self.area.clients])
+                //char_list = [-1] * len(self.server.char_list)
+
+                //for x in avail_char_ids:
+                //    char_list[x] = 0
+                send_command("CharsCheck", Config.Chars);
+                //self.send_command('HP', 1, self.area.hp_def)
+                //self.send_command('HP', 2, self.area.hp_pro)
+                //self.send_command('BN', self.area.background)
+                //self.send_command('LE', *self.area.get_evidence_list(self))
+                //self.send_command('MM', 1)
+                //self.send_command('OPPASS', fantacrypt.fanta_encrypt(self.server.config['guardpass']))
+                send_command("DONE");
             }
 
             public void char_select()
@@ -251,9 +323,11 @@ namespace AOServer.ServerAO.Data
         public static void new_client(WebSocket transport)
         {
             int cur_id = 0;
-            Client c = new Client(transport, 0000);
+            Client c = new Client(transport, 0000, clients_list.Count);
             clients_list.Add(c);
             Console.WriteLine("Client connected!");
+            Thread t = new Thread(clientLoop);
+            t.Start(c);
         }
 
         public static void remove_client(Client client)
@@ -276,6 +350,20 @@ namespace AOServer.ServerAO.Data
         {
             Client[] clients = new Client[Config.PlayerLimit];
             return clients;
+        }
+
+        public static void clientLoop(object _transport)
+        {
+            Client c = (Client)_transport;
+            while (true)
+            {
+                string buffer = c.transport.Read();
+                if (buffer != null)
+                {
+                    AOProtocol.data_received(buffer, c);
+                }
+            }
+
         }
 
 

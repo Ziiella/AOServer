@@ -11,15 +11,18 @@ namespace AOServer.ServerAO
 {
     class Config
     {
+        public static bool announce_areas = true;
         public static int port = 27015;
         public static IPAddress ipAdr = IPAddress.Parse("10.0.0.45");
         public static string ServerName { get; set; } = "Server";
         public static string MOTD = "=== MOTD ===\r\n{}\r\n=============";
         public static int PlayerLimit { get; set; }
 
+        #region DataLists
         public static List<string> Chars = new List<string>();
         public static List<string> Music = new List<string>();
         public static List<AreaManager> Areas = new List<AreaManager>();
+        #endregion
 
 
 

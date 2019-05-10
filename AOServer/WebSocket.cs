@@ -14,7 +14,6 @@ namespace AOServer
     {
         private TcpClient client;
         private NetworkStream stream;
-        string buffer;
 
         public WebSocket(TcpClient client)
         {
@@ -22,34 +21,7 @@ namespace AOServer
             stream = this.client.GetStream();
             ClientManager.new_client(this);
 
-            Thread t = new Thread(socketLoop);
-            t.Start(this);
-
         }
-
-        public void socketLoop(object _transport)
-        {
-            while (true)
-            {
-                buffer = Read();
-                if (buffer != null)
-                {
-                    data_received();
-                }
-            }
-
-        }
-
-
-        private void data_received()
-        {
-            /*Handles any data received from the network.
-            Receives data, parses them into a command and passes it
-            to the command handler.
-            :param data: bytes of data*/
-            Console.WriteLine(buffer);
-        }
-
 
         public void Close()
         {
@@ -57,9 +29,9 @@ namespace AOServer
             client.Close();
         }
 
-        public void Write(byte[] buffer, int offset, int size)
+        public void Write(byte[] buffer)
         {
-            stream.Write(buffer, offset, size);
+            stream.Write(buffer, 0, buffer.Length);
         }
 
         public string Read()
@@ -75,11 +47,7 @@ namespace AOServer
             return Encoding.UTF8.GetString(buffer, 0, byte_count);
         }
 
-        private string[] get_messages(string data)
-        {
-            string[] args = data.Split('#');
-            return args;
-        }
+
 
     }
 }
