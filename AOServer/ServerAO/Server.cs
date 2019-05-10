@@ -51,6 +51,7 @@ namespace AOServer.ServerAO
         public Server()
         {
             Config.Init();
+            AreaManager.load_areas();
 
         }
 

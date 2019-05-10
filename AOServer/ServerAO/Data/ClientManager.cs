@@ -12,35 +12,38 @@ namespace AOServer.ServerAO.Data
         public class Client
         {
 
-            public AreaManager area = null;
-            string hdid = "";
-            bool pm_mute = false;
-            int char_id = -1;
-            int ipid;
-            int id;
+            public AreaManager.Area area;
             public WebSocket transport;
-            //Area area = server.area_manager.default_area()
+            public bool is_muted;
+            public string hdid;
+            public int char_id;
+            public int ipid;
+            public int id;
+            public string pos;
+            public bool is_mod;
+            public bool is_cm;
+            public bool is_gm;
+            public bool is_dj;
+
+
             //self.evi_list = []
             //self.server = server
             public string name = "";
-            string fake_name = "";
-            bool is_mod = false;
-            bool is_gm = false;
-            bool is_dj = true;
-            string pos = "";
-            bool is_cm = false;
-            bool disemvowel = false;
-            bool remove_h = false;
-            bool disemconsonant = false;
-            bool gimp = false;
-            bool muted_global = false;
-            bool muted_adverts = false;
-            bool is_muted = false;
-            bool is_ooc_muted = false;
-            int mod_call_time = 0;
-            bool in_rp = false;
-            string following = "";
-            string followedby = "";
+            public string fake_name = "";
+
+
+            
+            public bool disemvowel = false;
+            public bool remove_h = false;
+            public bool disemconsonant = false;
+            public bool gimp = false;
+            public bool muted_global = false;
+            public bool muted_adverts = false;
+
+            public bool is_ooc_muted = false;
+            public int mod_call_time = 0;
+            public string following = "";
+            public string followedby = "";
 
             //music flood-guard stuff
             int mus_counter = 0;
@@ -49,9 +52,22 @@ namespace AOServer.ServerAO.Data
 
             public Client(WebSocket transport, int ipid, int user_id)
             {
+                area = AreaManager.default_area();
+                area.new_client(this);
                 this.transport = transport;
-                this.ipid = ipid;
+                is_muted = false;
+                hdid = "REPLACEME";
+                pos = "wit";
+                is_mod = false;
+                is_cm = false;
+                is_gm = false;
+                is_dj = true;
+                char_id = -1;
                 id = user_id;
+
+
+                this.ipid = ipid;
+                
             }
 
             public void send_raw_message(string msg)
@@ -161,7 +177,7 @@ namespace AOServer.ServerAO.Data
 
                 string old_char = get_char_name();
                 this.char_id = char_id;
-                pos = "";
+                pos = "wit";
                 string[] args;
 
                 args = new string[]{ $"{id}", "CID", $"{char_id}" };
@@ -180,7 +196,7 @@ namespace AOServer.ServerAO.Data
 
             }
 
-            public void change_area(AreaManager area)
+            public void change_area(AreaManager.Area area)
             {
 
             }
@@ -195,7 +211,7 @@ namespace AOServer.ServerAO.Data
 
             }
 
-            public void follow_area(AreaManager area)
+            public void follow_area(AreaManager.Area area)
             {
 
             }
