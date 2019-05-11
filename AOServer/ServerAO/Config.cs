@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using AOServer.ServerAO.Data;
 using System.Net.Sockets;
 using System.Net;
+using System.IO;
+using YamlDotNet;
+using YamlDotNet.RepresentationModel;
 
 namespace AOServer.ServerAO
 {
     class Config
     {
-        public static bool announce_areas = true;
+        public static bool announce_areas = false;
         public static int port = 27015;
         public static IPAddress ipAdr = IPAddress.Parse("10.0.0.45");
         public static string ServerName { get; set; } = "Server";
@@ -36,15 +39,41 @@ namespace AOServer.ServerAO
 
         private static void AddMusic()
         {
-            music_list.Add("Versus.mp3");
-            music_list.Add("BOX 15.mp3");
+            FileStream charConfigFile = new FileStream("config/music.yaml", FileMode.Open);
+            var input = new StreamReader(charConfigFile);
+            var yaml = new YamlStream();
+            yaml.Load(input);
+
+            var mapping = (YamlSequenceNode)yaml.Documents[0].RootNode;
+
+            foreach (YamlMappingNode category in mapping)
+            {
+                music_list.Add(category[new YamlScalarNode("category")].ToString());
+
+                var songs = (YamlSequenceNode)category.Children[new YamlScalarNode("songs")];
+
+                foreach(var song in songs)
+                {
+                    music_list.Add(song[new YamlScalarNode("name")].ToString());
+                }
+
+            }
+
         }
 
         static void AddChars()
         {
-            char_list.Add("Makoto_HD");
-            char_list.Add("Chiaki_HD");
-            char_list.Add("Kirigiri_HD");
+            FileStream charConfigFile = new FileStream("config/characters.yaml", FileMode.Open);
+            var input = new StreamReader(charConfigFile);
+            var yaml = new YamlStream();
+            yaml.Load(input);
+
+            var mapping = (YamlSequenceNode)yaml.Documents[0].RootNode;
+
+            foreach (var entry in mapping.Children)
+            {
+                char_list.Add(((YamlScalarNode)entry).Value);
+            }
         }
 
 

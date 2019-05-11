@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static AOServer.ServerAO.Data.ClientManager;
+using System.IO;
+using YamlDotNet;
+using YamlDotNet.RepresentationModel;
 
 namespace AOServer.ServerAO.Data
 {
@@ -141,9 +144,12 @@ namespace AOServer.ServerAO.Data
                 }
             }
 
-            public void send_host_message(int char_id)
+            public void send_host_message(string msg)
             {
-
+                foreach (var client in clients)
+                {
+                    client.send_host_message(msg);
+                }
             }
 
             public void set_next_msg_delay(int char_id)
@@ -212,13 +218,48 @@ namespace AOServer.ServerAO.Data
 
         public static void load_areas()
         {
-            Area area = new Area(0, "test", "test");
-            areas.Add(area);
-            area = new Area(1, "test2", "test");
-            areas.Add(area);
-            area = new Area(2, "test3", "test");
-            areas.Add(area);
 
+            FileStream charConfigFile = new FileStream("config/areas.yaml", FileMode.Open);
+            var input = new StreamReader(charConfigFile);
+            var yaml = new YamlStream();
+            yaml.Load(input);
+
+            var mapping = (YamlSequenceNode)yaml.Documents[0].RootNode;
+
+            foreach (YamlMappingNode item in mapping)
+            {
+                bool au = false;
+                string setName = item.Children[new YamlScalarNode("set")].ToString();
+                if (item.Children[new YamlScalarNode("au")].ToString() == "true")
+                    au = true;
+
+                load_areaset(setName, au);
+            }
+
+        }
+
+        private static void load_areaset(string setName, bool AU)
+        {
+            Dictionary<bool, string> sAU = new Dictionary<bool, string> { { true, "AU" }, { false, "" } };
+            FileStream setConfig = new FileStream($"config/areas/{setName}.yaml", FileMode.Open);
+            var input = new StreamReader(setConfig);
+            var yaml = new YamlStream();
+            yaml.Load(input);
+
+            var mapping = (YamlSequenceNode)yaml.Documents[0].RootNode;
+
+            foreach (YamlMappingNode item in mapping)
+            {
+                string aName = $"{areas.Count}-{item.Children[new YamlScalarNode("area")]} {sAU[AU]}";
+                string aBG = item.Children[new YamlScalarNode("background")].ToString();
+                //Console.WriteLine(item.Children[new YamlScalarNode("bglock")]);
+                //Console.WriteLine(item.Children[new YamlScalarNode("evidence_mod")]);
+                //Console.WriteLine(item.Children[new YamlScalarNode("locking_allowed")]);
+                //Console.WriteLine(item.Children[new YamlScalarNode("iniswap_allowed")]);
+                Area area = new Area(areas.Count, aName, aBG);
+                areas.Add(area);
+            }
+            setConfig.Close();
         }
 
         public static Area default_area()

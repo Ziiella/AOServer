@@ -58,6 +58,10 @@ namespace AOServer
                     net_cmd_cc(c, data);
                     break;
 
+                case "CT":
+                    net_cmd_ct(c, data);
+                    break;
+
                 case "MS":
                     net_cmd_ms(c, data);
                     break;
@@ -164,8 +168,9 @@ namespace AOServer
 
         public static void net_cmd_cc(Client c, string[] args)
         {
-            /*Character selection.
-            //CC#<client_id:int>#<char_id:int>#<hdid:string>#%
+            /*
+                Character selection.
+                CC#<client_id:int>#<char_id:int>#<hdid:string>#%
             */
 
             //if not self.validate_net_cmd(args, self.ArgType.INT, self.ArgType.INT, self.ArgType.STR, needs_auth=False):
@@ -175,6 +180,59 @@ namespace AOServer
             c.change_character(cid);
             //except ClientError:
             //    return
+        }
+
+        public static void net_cmd_ct(Client c, string[] args)
+        {
+            /*
+                OOC Message
+                CT#<name:string>#<message:string>#%
+            */
+
+            if(c.name == "" || c.name != args[1])
+                c.name = args[1];
+            if (c.is_ooc_muted)
+            {
+                c.send_host_message("You have been muted by a moderator");
+                return;
+            }
+            if (c.name == " ")
+            {
+                c.send_host_message("You must insert a name with at least one letter.");
+                return;
+            }
+            if (c.name.StartsWith(Config.ServerName))
+            {
+                c.send_host_message("That name is reserved!");
+                return;
+            }
+            if (c.name.Length > 15)
+            {
+                c.send_host_message("OOC name must be lower or equal than 15 characters.");
+                return;
+            }
+
+
+            //Commands
+            if (args[2].StartsWith("/"))
+            {
+                args[2] = args[2].Substring(1);
+                string[] spl = args[2].Split(' ');
+                CommandsOOC.ooc_command_send(c, spl);
+            }
+            else
+            {
+                if (c.disemvowel)
+                {
+                    args[2] = c.disemvowel_message(args[2]);
+                }
+                c.area.send_command("CT", new string[] { c.name, args[2] } );
+
+            }
+
+
+
+
         }
 
         public static void net_cmd_ms(Client c, string[] args)
