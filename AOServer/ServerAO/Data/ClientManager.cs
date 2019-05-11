@@ -43,7 +43,7 @@ namespace AOServer.ServerAO.Data
             public bool is_ooc_muted = false;
             public int mod_call_time = 0;
             public string following = "";
-            public string followedby = "";
+            public Client followedby = null;
 
             //music flood-guard stuff
             int mus_counter = 0;
@@ -199,7 +199,60 @@ namespace AOServer.ServerAO.Data
 
             public void change_area(AreaManager.Area area)
             {
+                if (this.area == area)
+                {
+                    throw new Exceptions.ClientError(this, "User is already in target area.");
+                }
+                if(area.is_locked && !is_mod && !is_gm) //and not(self.ipid in area.invite_list):
+                {
+                    throw new Exceptions.ClientError(this, "That area is locked!");
+                }
+                if (area.is_gmlocked && !is_mod && !is_gm) //and not(self.ipid in area.invite_list):
+                {
+                    throw new Exceptions.ClientError(this, "That area is gm-locked!");
+                }
+                if (area.is_gmlocked && !is_mod) //and not(self.ipid in area.invite_list):
+                {
+                    throw new Exceptions.ClientError(this, "That area is mod-locked!");
+                }
 
+                AreaManager.Area old_area = this.area;
+
+                if (!area.is_char_avaliable(char_id))
+                {
+                    int new_char_id = area.get_rand_avail_char_id();
+                    if(new_char_id == null)
+                    {
+                        throw new Exceptions.ClientError(this, "No available characters in that area.");
+                    }
+                    else
+                    {
+                        change_character(new_char_id);
+                        send_host_message($"Character taken, switched to {get_char_name()}.");
+                    }
+                }
+
+                this.area.remove_client(this);
+                this.area = area;
+                area.new_client(this);
+                
+                send_host_message($"Changed area to {area.name}.");//[{area.status}]
+                //logger.log_server(
+                //    '[{}]Changed area from {} ({}) to {} ({}).'.format(self.get_char_name(), old_area.name, old_area.id,
+                //                                                       self.area.name, self.area.id), self)
+                //#logger.log_rp(
+                //#    '[{}]Changed area from {} ({}) to {} ({}).'.format(self.get_char_name(), old_area.name, old_area.id,
+                //#                                                       self.area.name, self.area.id), self)
+
+                send_command("HP", new string[] { $"{1}", $"{area.hp_def}" });
+                send_command("HP", new string[] { $"{2}", $"{area.hp_pro}" });
+                send_command("BN", new string[] { $"{area.background}" });
+                //self.send_command('LE', *self.area.get_evidence_list(self))
+                //
+                if (followedby != null)
+                {
+                    followedby.follow_area(area);
+                }
             }
 
             public void follow_user(Client arg)
@@ -292,12 +345,12 @@ namespace AOServer.ServerAO.Data
 
                 //for x in avail_char_ids:
                 //    char_list[x] = 0
-                send_command("CharsCheck", Config.Chars);
-                //self.send_command('HP', 1, self.area.hp_def)
-                //self.send_command('HP', 2, self.area.hp_pro)
-                //self.send_command('BN', self.area.background)
+                send_command("CharsCheck", Config.char_list);
+                send_command("HP", new string[] { $"{1}", $"{area.hp_def}" });
+                send_command("HP", new string[] { $"{2}", $"{area.hp_pro}" });
+                send_command("BN", new string[] { $"{area.background}" });
                 //self.send_command('LE', *self.area.get_evidence_list(self))
-                //self.send_command('MM', 1)
+                send_command("MM", new string[] { $"{1}" });
                 //self.send_command('OPPASS', fantacrypt.fanta_encrypt(self.server.config['guardpass']))
                 send_command("DONE");
             }
@@ -335,7 +388,7 @@ namespace AOServer.ServerAO.Data
             {
                 if (char_id == -1)
                     return "CHAR_SELECT";
-                return Config.Chars[char_id];
+                return Config.char_list[char_id];
             }
 
             public void change_position(string pos = "")

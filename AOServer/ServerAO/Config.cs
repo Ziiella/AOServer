@@ -19,9 +19,9 @@ namespace AOServer.ServerAO
         public static int PlayerLimit { get; set; }
 
         #region DataLists
-        public static List<string> Chars = new List<string>();
-        public static List<string> Music = new List<string>();
-        public static List<AreaManager> Areas = new List<AreaManager>();
+        public static List<string> char_list = new List<string>();
+        public static List<string> music_list = new List<string>();
+        public static List<string> music_list_ao2 = new List<string>();
         #endregion
 
 
@@ -31,19 +31,20 @@ namespace AOServer.ServerAO
             PlayerLimit = 20;
             AddChars();
             AddMusic();
+
         }
 
         private static void AddMusic()
         {
-            Music.Add("Versus.mp3");
-            Music.Add("BOX 15.mp3");
+            music_list.Add("Versus.mp3");
+            music_list.Add("BOX 15.mp3");
         }
 
         static void AddChars()
         {
-            Chars.Add("Makoto_HD");
-            Chars.Add("Chiaki_HD");
-            Chars.Add("Kirigiri_HD");
+            char_list.Add("Makoto_HD");
+            char_list.Add("Chiaki_HD");
+            char_list.Add("Kirigiri_HD");
         }
 
 
@@ -72,8 +73,18 @@ namespace AOServer.ServerAO
 
         public static void build_music_list_ao2()
         {
+            foreach (var area in AreaManager.areas)
+            {
+                music_list_ao2.Add(area.name);
+            }
 
+            foreach (var music in music_list)
+            {
+                music_list_ao2.Add(music);
+            }
         }
+
+
 
     }
 }

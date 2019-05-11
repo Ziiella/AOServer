@@ -52,6 +52,7 @@ namespace AOServer.ServerAO
         {
             Config.Init();
             AreaManager.load_areas();
+            Config.build_music_list_ao2();
 
         }
 
@@ -90,7 +91,7 @@ namespace AOServer.ServerAO
 
         public static bool is_valid_char_id(int char_id)
         {
-            return Config.Chars.Count > char_id && char_id >= 0;
+            return Config.char_list.Count > char_id && char_id >= 0;
         }
 
 

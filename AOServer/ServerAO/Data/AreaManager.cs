@@ -16,8 +16,8 @@ namespace AOServer.ServerAO.Data
             public string name;
             public string background;
             bool bg_lock;
-            int hp_def;
-            int hp_pro;
+            public int hp_def;
+            public int hp_pro;
             //self.iniswap_allowed = iniswap_allowed
             //self.invite_list = {}
             //self.server = server
@@ -93,14 +93,14 @@ namespace AOServer.ServerAO.Data
                 //invite_list = {};
             }
 
-            public void is_char_avaliable(int char_id)
+            public bool is_char_avaliable(int char_id)
             {
-                
+                return true; 
             }
 
-            public void get_rand_avail_char_id(int char_id)
+            public int get_rand_avail_char_id()
             {
-
+                return 0;
             }
 
             public void send_command(string cmd, string[] args)
@@ -192,9 +192,9 @@ namespace AOServer.ServerAO.Data
         {
             Area area = new Area(0, "test", "test");
             areas.Add(area);
-            area = new Area(1, "test", "test");
+            area = new Area(1, "test2", "test");
             areas.Add(area);
-            area = new Area(2, "test", "test");
+            area = new Area(2, "test3", "test");
             areas.Add(area);
 
         }
@@ -206,12 +206,26 @@ namespace AOServer.ServerAO.Data
 
         public static Area get_area_by_name(string name)
         {
-            return areas[0];
+            foreach (var area in areas)
+            {
+                if(area.name == name)
+                {
+                    return area;
+                }
+            }
+            return null;
         }
 
         public static Area get_area_by_id(int id)
         {
-            return areas[0];
+            foreach (var area in areas)
+            {
+                if (area.id == id)
+                {
+                    return area;
+                }
+            }
+            return null;
         }
 
     }

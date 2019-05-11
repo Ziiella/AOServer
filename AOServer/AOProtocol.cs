@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static AOServer.ServerAO.Data.ClientManager;
+using AOServer.ServerAO.Data;
 
 namespace AOServer
 {
@@ -45,6 +46,9 @@ namespace AOServer
                 case "MS":
                     net_cmd_ms(c, data);
                     break;
+                case "MC":
+                    net_cmd_mc(c, data);
+                    break;
 
                 default:
                     break;
@@ -69,22 +73,22 @@ namespace AOServer
             askchaa#%*/
             string[] args = new string[3];
 
-            args[0] = ServerAO.Config.Chars.Count.ToString(); //Char count
+            args[0] = ServerAO.Config.char_list.Count.ToString(); //Char count
             args[1] = 0.ToString(); //Evidence count
-            args[2] = ServerAO.Config.Music.Count.ToString(); //Music Count
+            args[2] = ServerAO.Config.music_list.Count.ToString(); //Music Count
             c.send_command("SI", args);
         }
 
         public static void net_cmd_rc(Client c)
         {
             /*Asks for the whole character list(AO2)  AC#% */
-            c.send_command("SC", ServerAO.Config.Chars);
+            c.send_command("SC", ServerAO.Config.char_list);
         }
 
         public static void net_cmd_rm(Client c)
         {
             /* Asks for the whole music list(AO2) AM#% */
-            c.send_command("SM", ServerAO.Config.Music);
+            c.send_command("SM", ServerAO.Config.music_list_ao2);
         }
 
         public static void net_cmd_rd(Client c)
@@ -234,6 +238,24 @@ namespace AOServer
 
             //if self.client.area.is_recording:
             //    self.client.area.recorded_messages.append(args)
+        }
+
+        public static void net_cmd_mc(Client c, string[] args)
+        {
+            AreaManager.Area area = AreaManager.get_area_by_name(args[1]);
+            if(area != null)
+            {
+                try
+                {
+                    c.change_area(area);
+                }
+                catch (Exceptions.ClientError)
+                {
+                    Console.WriteLine("Error.");
+                }
+                    
+            }
+
         }
 
         #endregion
