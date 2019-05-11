@@ -95,12 +95,34 @@ namespace AOServer.ServerAO.Data
 
             public bool is_char_avaliable(int char_id)
             {
+                foreach (var client in clients)
+                {
+                    if(client.char_id == char_id)
+                    {
+                        return false;
+                    }
+                }
                 return true; 
             }
 
             public int get_rand_avail_char_id()
             {
-                return 0;
+                List<int> avail_set = new List<int>();
+
+                for(int i = 0; i < Config.char_list.Count; i++)
+                {
+                    avail_set.Add(i);
+                }
+
+                foreach (var client in clients)
+                {
+                    avail_set.Remove(client.char_id);               
+                }
+
+                var random = new Random();
+                int index = random.Next(avail_set.Count);
+
+                return avail_set[index];
             }
 
             public void send_command(string cmd, string[] args)
@@ -129,9 +151,9 @@ namespace AOServer.ServerAO.Data
 
             }
 
-            public void play_music(string name, int cid)
+            public void play_music(string name, int cid, int length = -1)
             {
-
+                send_command("MC", new string[] { $"{name}", $"{cid}" });
             }
 
             public void can_send_message()

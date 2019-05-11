@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static AOServer.ServerAO.Data.ClientManager;
 using AOServer.ServerAO.Data;
+using AOServer.ServerAO;
 
 namespace AOServer
 {
@@ -12,17 +13,31 @@ namespace AOServer
     {
 
 
-        public static void data_received(string buffer, Client c)
+        public static void data_received(string msg, Client c)
         {
             /*Handles any data received from the network.
             Receives data, parses them into a command and passes it
             to the command handler.
             :param data: bytes of data*/
-            Console.WriteLine(buffer);
-            string[] data = get_messages(buffer);
+
+            if (msg.StartsWith("#"))
+            {
+                msg = msg.Substring(1);
+                string[] spl = msg.Split('#');
+                msg = $"{FantaCrypt.fanta_decrypt(spl[0])}#{spl[1]}#%";
+            }
+            Console.WriteLine(msg);
+            string[] data = get_messages(msg);
 
             switch (data[0])
             {
+                case "HI":
+                    net_cmd_hi(c, data);
+                    break;
+                case "ID":
+                    net_cmd_id(c, data);
+                    break;
+
                 case "askchaa":
                     net_cmd_askchaa(c);
                     break;
@@ -46,6 +61,7 @@ namespace AOServer
                 case "MS":
                     net_cmd_ms(c, data);
                     break;
+
                 case "MC":
                     net_cmd_mc(c, data);
                     break;
@@ -66,6 +82,51 @@ namespace AOServer
 
 
         #region net_cmd_
+
+        public static void net_cmd_hi(Client c, string[] args)
+        {
+            c.hdid = args[1];
+            c.send_command("ID", new string[] { $"{c.id}", $"{Program.get_server_software()}", $"{Program.get_version_string()}" });
+            c.send_command("PN", new string[] { $"{Server.get_player_count() - 1}", $"{Config.PlayerLimit}" });
+        }
+
+        public static void net_cmd_id(Client c, string[] args)
+        {
+            /*Client version and PV
+            ID#<pv:int>#<software:string>#<version:string>#%*/
+
+            c.is_ao2 = false;
+
+            if (args.Count() > 3)
+                return;
+
+            //string[] version_list = args[2].Split('.');
+            //
+            //if len(version_list) < 3:
+            //    return
+            //
+            //release = int(version_list[0])
+            //major = int(version_list[1])
+            //minor = int(version_list[2])
+            //
+            //if args[0] != 'AO2':
+            //    return
+            //if release < 2:
+            //    return
+            //elif release == 2:
+            //    if major < 2:
+            //        return
+            //    elif major == 2:
+            //        if minor < 5:
+            //            return
+            //
+            if(args[1].ToLower() == "ao2")
+            {
+                c.is_ao2 = true;
+            }
+
+            c.send_command("FL", new string[] { "yellowtext", "customobjections", "flipping", "fastloading", "noencryption", "deskmod", "evidence" });
+            }
 
         public static void net_cmd_askchaa(Client c)
         {
@@ -146,7 +207,7 @@ namespace AOServer
             string anim = args[4];
             string text = args[5];
             string pos = args[6];
-            int sfx = int.Parse(args[7]);
+            string sfx = args[7];
             int anim_type = int.Parse(args[8]);
             int cid = int.Parse(args[9]);
             int sfx_delay = int.Parse(args[10]);
@@ -254,6 +315,56 @@ namespace AOServer
                     Console.WriteLine("Error.");
                 }
                     
+            }
+            else
+            {
+
+                if (c.is_muted)
+                {
+                    c.send_host_message("You have been muted by a moderator.");
+                    return;
+                }
+                if (!c.is_dj)
+                {
+                    c.send_host_message("You were blockdj\'d by a moderator.");
+                    return;
+                }
+                if (c.is_muted)
+                {
+                    c.send_host_message("You have been muted by a moderator.");
+                    return;
+                }
+
+                //if not self.validate_net_cmd(args, self.ArgType.STR, self.ArgType.INT):
+                //    return
+
+                if (int.Parse(args[2]) != c.char_id)
+                    return;
+                //    return
+
+                //if self.client.change_music_cd():
+                //    self.client.send_host_message('You changed song too much times. Please try again after {} seconds.'.format(int(self.client.change_music_cd())))
+                //    return
+
+                //try:
+                //    name, length = self.server.get_song_data(args[0])
+                c.area.play_music(args[1], int.Parse(args[2]));
+                //    self.client.area.play_music(name, self.client.char_id, length)
+                //    self.client.area.add_music_playing(self.client, name)
+                //    logger.log_server('[{}][{}]Changed music to {}.'
+                //                      .format(self.client.area.id, self.client.get_char_name(), name), self.client)
+                //except ServerError:
+                //    return
+
+                //except ClientError as ex:
+
+                //self.client.send_host_message(ex)
+
+
+
+
+
+
             }
 
         }

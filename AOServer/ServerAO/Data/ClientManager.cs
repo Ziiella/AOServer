@@ -20,6 +20,7 @@ namespace AOServer.ServerAO.Data
             public int ipid;
             public int id;
             public string pos;
+            public bool is_ao2;
             public bool is_mod;
             public bool is_cm;
             public bool is_gm;
@@ -64,10 +65,11 @@ namespace AOServer.ServerAO.Data
                 is_dj = true;
                 char_id = -1;
                 id = user_id;
-
-
                 this.ipid = ipid;
+
                 
+                send_command("decryptor", new string[] { $"{34}" });
+
             }
 
             public void send_raw_message(string msg)
@@ -94,7 +96,6 @@ namespace AOServer.ServerAO.Data
                     for (int i = 0; i < args.Length; i++) { msg += $"{args[i]}#"; }
 
                     send_raw_message($"{command}#{msg}%");
-                    Console.WriteLine($"{command}#{msg}%");
                 }
                 else
                 {
@@ -121,7 +122,6 @@ namespace AOServer.ServerAO.Data
                     for (int i = 0; i < args.Count; i++) { msg += $"{args[i]}#"; }
 
                     send_raw_message($"{command}#{msg}%");
-                    Console.WriteLine($"{command}#{msg}%");
                 }
                 else
                 {
@@ -156,23 +156,36 @@ namespace AOServer.ServerAO.Data
             {
                 if (!Server.is_valid_char_id(char_id))
                 {
-                    //raise ClientError('Invalid Character ID.')
+                    //ClientError('Invalid Character ID.')
+                }
+
+                if (!area.is_char_avaliable(char_id))
+                {
+                    if(this.char_id != char_id)
+                    {
+                        if (force)
+                        {
+                            foreach (var client in area.clients)
+                            {
+                                if(client.char_id == char_id)
+                                {
+                                    client.char_select();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //aise ClientError('Character not available.')
+                            return;
+                        }
+                    }
                 }
 
                 //if (!area.is_char_available(char_id))
                 //{
                 //    if(this.char_id != char_id)
                 //    {
-                //        if (force)
-                //        {
-                //            //for client in self.area.clients:
-                //            //    if client.char_id == char_id:
-                //            //        client.char_select()
-                //        }
-                //        else
-                //        {
-                //            //raise ClientError('Character not available.')
-                //        }
+
                 //    }
                 //}  
 
@@ -278,7 +291,6 @@ namespace AOServer.ServerAO.Data
 
                 foreach (var area in AreaManager.areas)
                 {
-                    Console.WriteLine("meow");
                     i++;
                     bool locked = false;
                     string owner = "FREE";
@@ -426,12 +438,16 @@ namespace AOServer.ServerAO.Data
         }
 
         public static List<Client> clients_list = new List<Client>();
+        int cur_id = 0;
 
         public static void new_client(WebSocket transport)
         {
-            int cur_id = 0;
+            
+            
             Client c = new Client(transport, 0000, clients_list.Count);
             clients_list.Add(c);
+
+            
             Console.WriteLine("Client connected!");
             Thread t = new Thread(clientLoop);
             t.Start(c);

@@ -21,6 +21,8 @@ namespace AOServer
             stream = this.client.GetStream();
             ClientManager.new_client(this);
 
+            
+
         }
 
         public bool isConnected()
@@ -58,7 +60,6 @@ namespace AOServer
             {
                 return null;
             }
-
             return Encoding.UTF8.GetString(buffer, 0, byte_count);
         }
 

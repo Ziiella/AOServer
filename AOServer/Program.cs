@@ -9,6 +9,7 @@ namespace AOServer
 {
     class Program
     {
+        static string Software = "AOServer";
         static int release = 0;
         static int major_version = 0;
         static int minor_version = 1;
@@ -27,6 +28,11 @@ namespace AOServer
             return $"{release}.{major_version}.{minor_version}";
         }
 
-        
+        public static string get_server_software()
+        {
+            return Software;
+        }
+
+
     }
 }
