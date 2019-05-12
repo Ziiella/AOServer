@@ -7,7 +7,6 @@ namespace AOServer
 {
     class AOProtocol
     {
-        static Dictionary<string, Func<Client, string[]>>  net_cmds = new Dictionary<string, Func<Client, string[]>>();
 
         public static void data_received(string msg, Client c)
         {
@@ -16,21 +15,16 @@ namespace AOServer
             to the command handler.
             :param data: bytes of data*/
 
-            if (msg.StartsWith("#"))
-            {
-                msg = msg.Substring(1);
-                string[] spl = msg.Split('#');
-                msg = $"{FantaCrypt.fanta_decrypt(spl[0])}#{spl[1]}#%";
-            }
-            string[] data = get_messages(msg);
+            Command cmd = new Command(msg);
+            Console.WriteLine(cmd.get_string());
 
-            switch (data[0])
+            switch (cmd.get_command())
             {
                 case "HI":
-                    net_cmd_hi(c, data);
+                    net_cmd_hi(c, cmd.get_args());
                     break;
                 case "ID":
-                    net_cmd_id(c, data);
+                    net_cmd_id(c, cmd.get_args());
                     break;
 
                 case "askchaa":
@@ -50,19 +44,19 @@ namespace AOServer
                     break;
 
                 case "CC":
-                    net_cmd_cc(c, data);
+                    net_cmd_cc(c, cmd.get_args());
                     break;
 
                 case "CT":
-                    net_cmd_ct(c, data);
+                    net_cmd_ct(c, cmd.get_args());
                     break;
 
                 case "MS":
-                    net_cmd_ms(c, data);
+                    net_cmd_ms(c, cmd.get_args());
                     break;
 
                 case "MC":
-                    net_cmd_mc(c, data);
+                    net_cmd_mc(c, cmd.get_args());
                     break;
 
                 default:
@@ -71,22 +65,15 @@ namespace AOServer
 
         }
 
-        public static string[] get_messages(string data)
-        {
-            string[] args = data.Split('#');
-            return args;
-        }
-
         #region net_cmd_
 
         public static void net_cmd_hi(Client c, string[] args)
         {
-            c.hdid = args[1];
+            c.hdid = args[0];
 
             Logger.log_server($"Connected. HDID: {c.hdid}.");
-            c.send_command("ID", new string[] { $"{c.id}", $"{Program.get_server_software()}", $"{Program.get_version_string()}" });
-            c.send_command("PN", new string[] { $"{Server.get_player_count() - 1}", $"{Config.PlayerLimit}" });
-
+            c.send_command(new Command("ID", c.id.ToString(), Program.get_server_software(), Program.get_version_string()));
+            c.send_command(new Command("PN", (Server.get_player_count() - 1).ToString(), Config.PlayerLimit.ToString()));
 
         }
 
@@ -97,7 +84,7 @@ namespace AOServer
 
             c.is_ao2 = false;
 
-            if (args.Count() > 3)
+            if (args.Count() > 2)
                 return;
 
             //string[] version_list = args[2].Split('.');
@@ -120,37 +107,34 @@ namespace AOServer
             //        if minor < 5:
             //            return
             //
-            if(args[1].ToLower() == "ao2")
+            if(args[0].ToLower() == "ao2")
             {
                 c.is_ao2 = true;
             }
+            c.send_command(new Command("FL", "yellowtext", "customobjections", "flipping", "fastloading", "noencryption", "deskmod", "evidence"));
 
-            c.send_command("FL", new string[] { "yellowtext", "customobjections", "flipping", "fastloading", "noencryption", "deskmod", "evidence" });
             }
 
         public static void net_cmd_askchaa(Client c)
         {
-            /*Ask for the counts of characters/evidence/music
-            askchaa#%*/
-            string[] args = new string[3];
+            /*
+             Ask for the counts of characters/evidence/music
+            askchaa#%
+            */
 
-            args[0] = Config.char_list.Count.ToString(); //Char count
-            args[1] = 0.ToString(); //Evidence count
-            args[2] = Config.music_list.Count.ToString(); //Music Count
-            c.send_command("SI", args);
+            c.send_command(new Command("SI", Config.char_list.Count.ToString(), 0.ToString(), Config.music_list.Count.ToString()));
         }
 
         public static void net_cmd_rc(Client c)
         {
             /*Asks for the whole character list(AO2)  AC#% */
-            c.send_command("SC", Config.char_list);
+            c.send_command(new Command("SC", Config.char_list));
         }
 
         public static void net_cmd_rm(Client c)
         {
             /* Asks for the whole music list(AO2) AM#% */
-            c.send_command("SM", Config.music_list_ao2);
-        }
+            c.send_command(new Command("SM", Config.music_list_ao2));        }
 
         public static void net_cmd_rd(Client c)
         {
@@ -169,7 +153,7 @@ namespace AOServer
                 CC#<client_id:int>#<char_id:int>#<hdid:string>#%
             */
 
-            int cid = int.Parse(args[2]);
+            int cid = int.Parse(args[1]);
             try
             {
                 c.change_character(cid);
@@ -184,8 +168,8 @@ namespace AOServer
                 CT#<name:string>#<message:string>#%
             */
 
-            if(c.name == "" || c.name != args[1])
-                c.name = args[1];
+            if(c.name == "" || c.name != args[0])
+                c.name = args[0];
             if (c.is_ooc_muted)
             {
                 c.send_host_message("You have been muted by a moderator");
@@ -210,10 +194,10 @@ namespace AOServer
 
 
             //Commands
-            if (args[2].StartsWith("/"))
+            if (args[1].StartsWith("/"))
             {
-                args[2] = args[2].Substring(1);
-                string[] spl = args[2].Split(' ');
+                args[1] = args[1].Substring(1);
+                string[] spl = args[1].Split(' ');
                 CommandsOOC.ooc_command(c, spl);
             }
             else
@@ -230,12 +214,11 @@ namespace AOServer
                 }
                 else if (c.disemvowel)
                 {
-                    args[2] = c.disemvowel_message(args[2]);
+                    args[1] = c.disemvowel_message(args[1]);
                 }
-                Logger.log_server($"[OOC][{c.area.id}][{c.get_char_name()}][{c.name}]{args[2]}");
-                
-                c.area.send_command("CT", new string[] { c.name, args[2] } );
+                Logger.log_server($"[OOC][{c.area.id}][{c.get_char_name()}][{c.name}]{args[1]}");
 
+                c.area.send_command(new Command("CT", c.name, args[1]));
             }
         }
 
@@ -265,21 +248,21 @@ namespace AOServer
                 return;
 
 
-            string msg_type = args[1];
-            string pre = args[2];
-            string folder = args[3];
-            string anim = args[4];
-            string text = args[5];
-            string pos = args[6];
-            string sfx = args[7];
-            int anim_type = int.Parse(args[8]);
-            int cid = int.Parse(args[9]);
-            int sfx_delay = int.Parse(args[10]);
-            int button = int.Parse(args[11]);
-            int evidence = int.Parse(args[12]);
-            int flip = int.Parse(args[13]);
-            int ding = int.Parse(args[14]);
-            int color = int.Parse(args[15]);
+            string msg_type = args[0];
+            string pre = args[1];
+            string folder = args[2];
+            string anim = args[3];
+            string text = args[4];
+            string pos = args[5];
+            string sfx = args[6];
+            int anim_type = int.Parse(args[7]);
+            int cid = int.Parse(args[8]);
+            int sfx_delay = int.Parse(args[9]);
+            int button = int.Parse(args[10]);
+            int evidence = int.Parse(args[11]);
+            int flip = int.Parse(args[12]);
+            int ding = int.Parse(args[13]);
+            int color = int.Parse(args[14]);
 
             //if self.client.area.is_iniswap(self.client, pre, anim, folder) and folder != self.client.get_char_name():
             //    self.client.send_host_message("Iniswap is blocked in this area")
@@ -354,9 +337,10 @@ namespace AOServer
 
 
             string[] newargs;
-            newargs = new string[] { msg_type, pre, folder, anim, msg, pos, $"{sfx}", $"{anim_type}", $"{cid}", $"{sfx_delay}", $"{button}", $"{evidence}", $"{flip}", $"{ding}", $"{color}" };
+            newargs = new string[] {  };
 
-            c.area.send_command("MS", newargs);
+            c.area.send_command(new Command("MS", msg_type, pre, folder, anim, msg, pos, $"{sfx}", $"{anim_type}", $"{cid}", 
+                                              $"{sfx_delay}", $"{button}", $"{evidence}", $"{flip}", $"{ding}", $"{color}"));
 
             Logger.log_server($"[IC][{c.area.id}][{c.get_char_name()}]{msg}");
 
@@ -372,7 +356,7 @@ namespace AOServer
 
         public static void net_cmd_mc(Client c, string[] args)
         {
-            AreaManager.Area area = AreaManager.get_area_by_name(args[1]);
+            AreaManager.Area area = AreaManager.get_area_by_name(args[0]);
             if(area != null)
             {
                 try
@@ -402,7 +386,7 @@ namespace AOServer
                 //if not self.validate_net_cmd(args, self.ArgType.STR, self.ArgType.INT):
                 //    return
 
-                if (int.Parse(args[2]) != c.char_id)
+                if (int.Parse(args[1]) != c.char_id)
                     return;
                 //    return
 
@@ -412,10 +396,10 @@ namespace AOServer
 
                 //try:
                 //    name, length = self.server.get_song_data(args[0])
-                c.area.play_music(args[1], int.Parse(args[2]));
+                c.area.play_music(args[0], int.Parse(args[1]));
                 //    self.client.area.play_music(name, self.client.char_id, length)
                 //    self.client.area.add_music_playing(self.client, name)
-                Logger.log_server($"[{c.area.id}][{c.get_char_name()}]Changed music to {args[1]}.");
+                Logger.log_server($"[{c.area.id}][{c.get_char_name()}]Changed music to {args[0]}.");
 
 
 

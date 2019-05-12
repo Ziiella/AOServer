@@ -8,9 +8,8 @@ namespace AOServer
 {
     class Command
     {
-
-        private string command { get; set; }
-        private string[] Args { get; set; }
+        private string command;
+        private string[] Args;
 
         public Command(byte[] buffer)
         {
@@ -28,14 +27,38 @@ namespace AOServer
             Args = args;
         }
 
-        public byte[] Buffer()
+        public Command(string command, List<string> args)
         {
-            return Encoding.UTF8.GetBytes($"{command}#{string.Join("#", Args)}#%");
+            this.command = command;
+            Args = args.ToArray();
         }
 
-        public string String()
+        public byte[] get_buffer()
         {
-            return $"{command}#{string.Join("#", Args)}#%";
+            return Encoding.UTF8.GetBytes(get_string());
+        }
+
+        public string get_string()
+        {
+            if(Args.Count() == 0)
+            {
+                return $"{command}#%";
+            }
+            else
+            {
+                return $"{command}#{string.Join("#", Args)}#%";
+            }
+            
+        }
+
+        public string get_command()
+        {
+            return command;
+        }
+
+        public string[] get_args()
+        {
+            return Args;
         }
 
         private void parse_string(string msg)
@@ -51,20 +74,18 @@ namespace AOServer
             {
 
                 string[] spl = msg.Split('#');
-                command = spl[1];
+                command = spl[0];
 
                 string[] args = new string[spl.Count() - 1];
 
                 for (int i = 1; i < spl.Count(); i++)
                 {
-                    args[i - 1] = spl[i];
+                        args[i - 1] = spl[i];
                 }
 
                 Args = args;
 
             }
         }
-
-
     }
 }

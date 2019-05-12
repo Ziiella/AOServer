@@ -33,17 +33,9 @@ namespace AOServer
         //self.backgrounds = None
         //self.data = None
         //self.features = set()
-        //self.load_characters()
-        //self.load_music()
-        //self.load_backgrounds()
-        //self.load_data()
-        //self.load_ids()
-        //self.enable_features()
         //self.stats_manager = Database(self)
         //self.district_client = None
         //self.ms_client = None
-        bool runner = true;
-        long runtime = 0;
         //logger.setup_logger(debug=self.config['debug'], log_size=self.config['log_size'],
         //                    log_backups=self.config['log_backups'], areas=self.area_manager.areas)
 
@@ -54,6 +46,12 @@ namespace AOServer
             Config.Init();
             AreaManager.load_areas();
             Config.build_music_list_ao2();
+            //self.load_characters()
+            //self.load_music()
+            //self.load_backgrounds()
+            //self.load_data()
+            //self.load_ids()
+            //self.enable_features()
 
         }
 
@@ -122,11 +120,11 @@ namespace AOServer
             return "nothing.mp3";
         }
 
-        public static void send_all_cmd_pred(string cmd, string[] args)
+        public static void send_all_cmd_pred(Command cmd)
         {
             foreach(var client in ClientManager.clients)
             {
-                client.send_command(cmd, args);
+                client.send_command(cmd);
             }
 
             //for client in self.client_manager.clients:

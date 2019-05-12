@@ -126,21 +126,14 @@ namespace AOServer
                 return avail_set[index];
             }
 
-            public void send_command(string cmd, string[] args)
+            public void send_command(Command cmd)
             {
                 foreach (var client in clients)
                 {
-                    client.send_command(cmd, args);
+                    client.send_command(cmd);
                 }
             }
 
-            public void send_command(string cmd, List<string> args)
-            {
-                foreach (var client in clients)
-                {
-                    client.send_command(cmd, args);
-                }
-            }
 
             public void send_host_message(string msg)
             {
@@ -157,7 +150,7 @@ namespace AOServer
 
             public void play_music(string name, int cid, int length = -1)
             {
-                send_command("MC", new string[] { $"{name}", $"{cid}" });
+                send_command(new Command("MC", name, cid.ToString()));
             }
 
             public bool can_send_message()
@@ -177,7 +170,7 @@ namespace AOServer
                     if (bgitem == bg)
                     {
                         background = bg;
-                        send_command("BN", new string[] { background });
+                        send_command(new Command("BM", background));
                         return;
                     }
                 }

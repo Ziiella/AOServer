@@ -64,21 +64,13 @@ namespace AOServer
                 id = user_id;
                 this.ipid = ipid;
 
-                
-                send_command("decryptor", new string[] { $"{34}" });
+                send_command(new Command("decryptor", $"{34}"));
 
             }
 
-            public void send_raw_message(string msg)
+            public void send_command(Command cmd)
             {
-                transport.Write(Encoding.UTF8.GetBytes(msg));
-            }
-
-            public void send_command(string command, string[] args = null)
-            {
-                if (args != null)
-                {
-                    if (command == "MS")
+                    if (cmd.get_command() == "MS")
                     {
                         //        for evi_num in range(len(self.evi_list)):
                         //            if self.evi_list[evi_num] == args[11]:
@@ -88,48 +80,13 @@ namespace AOServer
                         //                break;
                     }
 
-                    string msg = "";
-                    for (int i = 0; i < args.Length; i++) { msg += $"{args[i]}#"; }
-
-                    send_raw_message($"{command}#{msg}%");
-                }
-                else
-                {
-                    send_raw_message($"{command}#%");
-                }
-
-            }
-
-            public void send_command(string command, List<string> args)
-            {
-                if (args != null)
-                {
-                    if (command == "MS")
-                    {
-                        //        for evi_num in range(len(self.evi_list)):
-                        //            if self.evi_list[evi_num] == args[11]:
-                        //                lst = list(args)
-                        //                lst[11] = evi_num
-                        //                args = tuple(lst)
-                        //                break;
-                    }
-
-                    string msg = "";
-                    for (int i = 0; i < args.Count; i++) { msg += $"{args[i]}#"; }
-
-                    send_raw_message($"{command}#{msg}%");
-                }
-                else
-                {
-                    send_raw_message($"{command}#%");
-                }
-
+                    transport.Write(cmd.get_buffer());
             }
 
             public void send_host_message(string msg)
             {
-                string[] args = new string[] { $"{Config.ServerName}", msg };
-                send_command("CT", args);
+
+                send_command(new Command("CT", Config.ServerName, msg));
             }
 
             public void send_motd()
@@ -187,10 +144,8 @@ namespace AOServer
                 string old_char = get_char_name();
                 this.char_id = char_id;
                 pos = "wit";
-                string[] args;
 
-                args = new string[]{ $"{id}", "CID", $"{char_id}" };
-                send_command("PV", args);
+                send_command(new Command("PV", id.ToString(), "CID", char_id.ToString()));
                 //            logger.log_server('[{}]Changed character from {} to {}.'
                 //                              .format(self.area.id, old_char, self.get_char_name()), self)
             }
@@ -251,10 +206,9 @@ namespace AOServer
                 //#logger.log_rp(
                 //#    '[{}]Changed area from {} ({}) to {} ({}).'.format(self.get_char_name(), old_area.name, old_area.id,
                 //#                                                       self.area.name, self.area.id), self)
-
-                send_command("HP", new string[] { $"{1}", $"{area.hp_def}" });
-                send_command("HP", new string[] { $"{2}", $"{area.hp_pro}" });
-                send_command("BN", new string[] { $"{area.background}" });
+                send_command(new Command("HP", 1.ToString(), area.hp_def.ToString()));
+                send_command(new Command("HP", 2.ToString(), area.hp_pro.ToString()));
+                send_command(new Command("BN", area.background));
                 //self.send_command('LE', *self.area.get_evidence_list(self))
                 //
                 if (followedby != null)
@@ -352,14 +306,14 @@ namespace AOServer
 
                 //for x in avail_char_ids:
                 //    char_list[x] = 0
-                send_command("CharsCheck", Config.char_list);
-                send_command("HP", new string[] { $"{1}", $"{area.hp_def}" });
-                send_command("HP", new string[] { $"{2}", $"{area.hp_pro}" });
-                send_command("BN", new string[] { $"{area.background}" });
+                send_command(new Command("CharsCheck", Config.char_list));
+                send_command(new Command("HP", 1.ToString(), area.hp_def.ToString()));
+                send_command(new Command("HP", 2.ToString(), area.hp_pro.ToString()));
+                send_command(new Command("BN", area.background));
                 //self.send_command('LE', *self.area.get_evidence_list(self))
-                send_command("MM", new string[] { $"{1}" });
+                send_command(new Command("MM", 1.ToString()));
                 //self.send_command('OPPASS', fantacrypt.fanta_encrypt(self.server.config['guardpass']))
-                send_command("DONE");
+                send_command(new Command("DONE"));
             }
 
             public void char_select()
