@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AOServer.ServerAO.Data.ClientManager;
 
 namespace AOServer
@@ -10,12 +7,33 @@ namespace AOServer
     class CommandsOOC
     {
 
+        private static string CombineArgs(string[] args)
+        {
+            string result = "";
+            result += args[1];
+            for (int i = 2; i < args.Count(); i++)
+            {
+                result += " ";
+                result += args[i];
+            }
+            return result;
+        }
+
         public static void ooc_command(Client c, string[] args)
         {
             switch (args[0])
             {
                 case "getareas":
                     c.send_area_list();
+                    break;
+
+                case "lockdown":
+                    ooc_cmd_lockdown(c, args);
+                    break;
+
+                case "bg":
+                case "background":
+                    ooc_cmd_bg(c, args);
                     break;
 
                 case "roll":
@@ -45,7 +63,47 @@ namespace AOServer
             
         }
 
+        #region UserCommands
+        public static void ooc_cmd_switch(Client c, string[] args)
+        {
+            if (args.Count() < 2)
+            {
+                c.send_host_message("You must specify a character name.");
+                return;
+            }
+            int cid = ServerAO.Server.get_char_id_by_name(args[1]);
+            try
+            {
+                c.change_character(cid, c.is_mod);
+                c.send_host_message("Character changed.");
+            }
+            catch { };
+        }
 
+        public static void ooc_cmd_bg(Client c, string[] args)
+        {
+            if (args.Count() < 2)
+            {
+                c.send_host_message("You must specify a name. Use /bg <background>.");
+                return;
+            }
+            if (!c.is_mod && c.area.bg_lock)
+            {
+                c.send_host_message("This area's background is locked");
+                return;
+            }
+            try
+            {
+                string bg = CombineArgs(args);
+                c.area.change_background(c, bg);
+                c.area.send_host_message($"{c.get_char_name()} changed the background to {c.area.background}.");
+            }
+            catch { }
+
+        }
+        #endregion
+
+        #region ModCommands
         public static void ooc_cmd_login(Client c, string[] args)
         {
             if (args.Count() < 2)
@@ -63,22 +121,36 @@ namespace AOServer
 
          }
 
-        
-
-        public static void ooc_cmd_switch(Client c, string[] args)
+        public static void ooc_cmd_lockdown(Client c, string[] args)
         {
-            if(args.Count() < 2)
+            if (!c.is_mod)
             {
-                c.send_host_message("You must specify a character name.");
+                c.send_host_message("You are unauthorized to use that command.");
                 return;
             }
-            int cid = ServerAO.Server.get_char_id_by_name(args[1]);
-            try
+            if(args.Count() < 2)
             {
-                c.change_character(cid, c.is_mod);
-                c.send_host_message("Character changed.");
+                c.send_host_message("Please specify if you're locking down the server or area.");
+                return;
             }
-            catch { };
+
+            switch (args[1].ToLower())
+            {
+                case "server":
+                    ServerAO.Server.lockdown();
+                    break;
+
+                case "area":
+                    c.area.lockdown();
+                    break;
+
+                default:
+                    c.send_host_message("Please specify if you're locking down the server or area.");
+                    break;
+            }
+
         }
+        #endregion
+
     }
 }

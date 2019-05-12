@@ -447,15 +447,15 @@ namespace AOServer.ServerAO.Data
 
         }
 
-        public static List<Client> clients_list = new List<Client>();
+        public static List<Client> clients = new List<Client>();
         int cur_id = 0;
 
         public static void new_client(WebSocket transport)
         {
             
             
-            Client c = new Client(transport, 0000, clients_list.Count);
-            clients_list.Add(c);
+            Client c = new Client(transport, 0000, clients.Count);
+            clients.Add(c);
 
             
             Thread t = new Thread(clientLoop);
@@ -464,7 +464,7 @@ namespace AOServer.ServerAO.Data
 
         public static void remove_client(Client client)
         {
-            clients_list.Remove(client);
+            clients.Remove(client);
         }
 
         public static void get_targets(Client client, object key, string value, bool local = false)

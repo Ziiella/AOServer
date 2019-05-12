@@ -13,8 +13,6 @@ namespace AOServer
     {
         static Dictionary<string, Func<Client, string[]>>  net_cmds = new Dictionary<string, Func<Client, string[]>>();
 
-
-
         public static void data_received(string msg, Client c)
         {
             /*Handles any data received from the network.
@@ -77,17 +75,13 @@ namespace AOServer
 
         }
 
-
         public static string[] get_messages(string data)
         {
             string[] args = data.Split('#');
             return args;
         }
 
-
-
         #region net_cmd_
-
 
         public static void net_cmd_hi(Client c, string[] args)
         {
@@ -179,13 +173,12 @@ namespace AOServer
                 CC#<client_id:int>#<char_id:int>#<hdid:string>#%
             */
 
-            //if not self.validate_net_cmd(args, self.ArgType.INT, self.ArgType.INT, self.ArgType.STR, needs_auth=False):
-            //    return
             int cid = int.Parse(args[2]);
-            //try:
-            c.change_character(cid);
-            //except ClientError:
-            //    return
+            try
+            {
+                c.change_character(cid);
+            }
+            catch { return; }
         }
 
         public static void net_cmd_ct(Client c, string[] args)
@@ -219,6 +212,7 @@ namespace AOServer
             }
 
 
+
             //Commands
             if (args[2].StartsWith("/"))
             {
@@ -228,7 +222,17 @@ namespace AOServer
             }
             else
             {
-                if (c.disemvowel)
+                if (c.area.is_lockdown && !c.is_mod)
+                {
+                    c.send_host_message("The area is currently in lockdown.");
+                    return;
+                }
+                if (Server.is_lockdown && !c.is_mod)
+                {
+                    c.send_host_message("The server is currently in lockdown.");
+                    return;
+                }
+                else if (c.disemvowel)
                 {
                     args[2] = c.disemvowel_message(args[2]);
                 }
@@ -237,10 +241,6 @@ namespace AOServer
                 c.area.send_command("CT", new string[] { c.name, args[2] } );
 
             }
-
-
-
-
         }
 
         public static void net_cmd_ms(Client c, string[] args)
@@ -254,17 +254,19 @@ namespace AOServer
                 c.send_host_message("You have been muted by a moderator");
                 return;
             }
-            
-            //if not self.client.area.can_send_message():
-            //    return
+            if (c.area.is_lockdown && !c.is_mod)
+            {
+                c.send_host_message("The area is currently in lockdown.");
+                return;
+            }
+            if (Server.is_lockdown && !c.is_mod)
+            {
+                c.send_host_message("The server is currently in lockdown.");
+                return;
+            }
 
-
-            //if not self.validate_net_cmd(args, self.ArgType.STR, self.ArgType.STR_OR_EMPTY, self.ArgType.STR,
-            //                             self.ArgType.STR,
-            //                             self.ArgType.STR, self.ArgType.STR, self.ArgType.STR, self.ArgType.INT,
-            //                             self.ArgType.INT, self.ArgType.INT, self.ArgType.INT, self.ArgType.INT,
-            //                             self.ArgType.INT, self.ArgType.INT, self.ArgType.INT):
-            //    return
+            if (!c.area.can_send_message())
+                return;
 
 
             string msg_type = args[1];
@@ -398,11 +400,6 @@ namespace AOServer
                 if (!c.is_dj)
                 {
                     c.send_host_message("You were blockdj\'d by a moderator.");
-                    return;
-                }
-                if (c.is_muted)
-                {
-                    c.send_host_message("You have been muted by a moderator.");
                     return;
                 }
 

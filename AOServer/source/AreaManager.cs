@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static AOServer.ServerAO.Data.ClientManager;
 using System.IO;
-using YamlDotNet;
+using System.Collections.Generic;
 using YamlDotNet.RepresentationModel;
+using static AOServer.ServerAO.Data.ClientManager;
 
 namespace AOServer.ServerAO.Data
 {
@@ -18,9 +14,11 @@ namespace AOServer.ServerAO.Data
             public int id;
             public string name;
             public string background;
-            bool bg_lock;
+            public bool bg_lock;
             public int hp_def;
             public int hp_pro;
+            public bool gm_mute;
+            public bool is_lockdown;
             //self.iniswap_allowed = iniswap_allowed
             //self.invite_list = {}
             //self.server = server
@@ -29,7 +27,6 @@ namespace AOServer.ServerAO.Data
             //self.doc = 'No document.'
             //self.status = 'IDLE'
             //self.judgelog = []
-            //self.current_music_player = ''
             //self.evi_list = EvidenceList()
             //self.is_recording = False
             //self.recorded_messages = []
@@ -54,6 +51,7 @@ namespace AOServer.ServerAO.Data
 
                 owned = false;
                 is_locked = false;
+                is_lockdown = false;
                 is_gmlocked = false;
                 is_modlocked = false;
 
@@ -162,9 +160,9 @@ namespace AOServer.ServerAO.Data
                 send_command("MC", new string[] { $"{name}", $"{cid}" });
             }
 
-            public void can_send_message()
+            public bool can_send_message()
             {
-
+                return true;
             }
 
             public void change_hp(int side, int val)
@@ -172,8 +170,19 @@ namespace AOServer.ServerAO.Data
 
             }
 
-            public void change_background(string bg)
+            public void change_background(Client c, string bg)
             {
+                foreach (var bgitem in Config.bg_list)
+                {
+                    if (bgitem == bg)
+                    {
+                        background = bg;
+                        send_command("BN", new string[] { background });
+                        return;
+                    }
+                }
+                throw new Exceptions.AreaError(c, "Invalid background name.");
+
 
             }
 
@@ -210,6 +219,20 @@ namespace AOServer.ServerAO.Data
             public void broadcast_evidence_list()
             {
 
+            }
+
+            public void lockdown()
+            {
+                if (is_lockdown)
+                {
+                    is_lockdown = false;
+                    send_host_message("The area is no longer in lockdown.");
+                }
+                else if (!is_lockdown)
+                {
+                    is_lockdown = true;
+                    send_host_message("The area is now in lockdown.");
+                }
             }
 
         }
@@ -250,13 +273,14 @@ namespace AOServer.ServerAO.Data
 
             foreach (YamlMappingNode item in mapping)
             {
+
                 string aName = $"{areas.Count}-{item.Children[new YamlScalarNode("area")]} {sAU[AU]}";
                 string aBG = item.Children[new YamlScalarNode("background")].ToString();
-                //Console.WriteLine(item.Children[new YamlScalarNode("bglock")]);
+                bool bgLock = bool.Parse(item.Children[new YamlScalarNode("bglock")].ToString());
                 //Console.WriteLine(item.Children[new YamlScalarNode("evidence_mod")]);
                 //Console.WriteLine(item.Children[new YamlScalarNode("locking_allowed")]);
                 //Console.WriteLine(item.Children[new YamlScalarNode("iniswap_allowed")]);
-                Area area = new Area(areas.Count, aName, aBG);
+                Area area = new Area(areas.Count, aName, aBG, bgLock);
                 areas.Add(area);
             }
             setConfig.Close();

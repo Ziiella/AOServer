@@ -13,8 +13,8 @@ namespace AOServer.ServerAO
 {
     class Server
     {
-        readonly static object _lock = new object();
-        static TcpListener server = null;
+        public static bool is_lockdown;
+        static TcpListener server;
         //self.allowed_iniswaps = None
         //self.loaded_ips = {}
 
@@ -50,6 +50,7 @@ namespace AOServer.ServerAO
 
         public Server()
         {
+            is_lockdown = false;
             Logger.Init(false, false);
             Config.Init();
             AreaManager.load_areas();
@@ -74,14 +75,24 @@ namespace AOServer.ServerAO
 
         }
 
-        public void remove_client()
+        public static void lockdown()
         {
-
+            if (is_lockdown)
+            {
+                is_lockdown = false;
+                send_all_host_message("The server is no longer in lockdown.");
+            }
+            else if (!is_lockdown)
+            {
+                is_lockdown = true;
+                send_all_host_message("The server is now in lockdown.");
+            }
         }
+
 
         public static int get_player_count()
         {
-            return ClientManager.clients_list.Count();
+            return ClientManager.clients.Count();
         }
 
         public static string get_ipid()
@@ -89,12 +100,10 @@ namespace AOServer.ServerAO
             return "N/A";
         }
 
-
         public static bool is_valid_char_id(int char_id)
         {
             return Config.char_list.Count > char_id && char_id >= 0;
         }
-
 
         public static int get_char_id_by_name(string name)
         {
@@ -116,7 +125,22 @@ namespace AOServer.ServerAO
 
         public static void send_all_cmd_pred(string cmd, string[] args)
         {
+            foreach(var client in ClientManager.clients)
+            {
+                client.send_command(cmd, args);
+            }
 
+            //for client in self.client_manager.clients:
+            //if pred(client):
+            //    client.send_command(cmd, *args)
+        }
+
+        public static void send_all_host_message(string msg)
+        {
+            foreach (var client in ClientManager.clients)
+            {
+                client.send_host_message(msg);
+            }
         }
 
         public static void broadcast_global(ClientManager.Client client, string msg, bool as_mod = false)
@@ -142,7 +166,6 @@ namespace AOServer.ServerAO
             //	'GLOBAL#{}#{}#{}#{}'.format(int(as_mod), client.area.id, username, msg))
 
         }
-
 
         public static void broadcast_need(ClientManager.Client client, string msg)
         {

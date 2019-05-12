@@ -24,6 +24,7 @@ namespace AOServer.ServerAO
         #region DataLists
         public static List<string> char_list = new List<string>();
         public static List<string> music_list = new List<string>();
+        public static List<string> bg_list = new List<string>();
         public static List<string> music_list_ao2 = new List<string>();
         #endregion
 
@@ -32,12 +33,13 @@ namespace AOServer.ServerAO
         public static void Init()
         {
             PlayerLimit = 20;
-            AddChars();
-            AddMusic();
+            load_backgrounds();
+            load_chars();
+            load_music();
 
         }
 
-        private static void AddMusic()
+        private static void load_music()
         {
             FileStream charConfigFile = new FileStream("config/music.yaml", FileMode.Open);
             var input = new StreamReader(charConfigFile);
@@ -61,7 +63,7 @@ namespace AOServer.ServerAO
 
         }
 
-        static void AddChars()
+        static void load_chars()
         {
             FileStream charConfigFile = new FileStream("config/characters.yaml", FileMode.Open);
             var input = new StreamReader(charConfigFile);
@@ -76,19 +78,25 @@ namespace AOServer.ServerAO
             }
         }
 
-
-
         public static void load_iniswaps()
         {
 
         }
 
-
-        public static void load_backgrounds()
+        private static void load_backgrounds()
         {
+            FileStream bgConfigFile = new FileStream("config/backgrounds.yaml", FileMode.Open);
+            var input = new StreamReader(bgConfigFile);
+            var yaml = new YamlStream();
+            yaml.Load(input);
 
+            var mapping = (YamlSequenceNode)yaml.Documents[0].RootNode;
+
+            foreach (var entry in mapping.Children)
+            {
+                bg_list.Add(((YamlScalarNode)entry).Value);
+            }
         }
-
 
         public static void build_char_pages_ao1()
         {
