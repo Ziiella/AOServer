@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Net;
+﻿using System.Text;
 using System.Net.Sockets;
-using AOServer.ServerAO.Data;
 
 namespace AOServer
 {
@@ -20,9 +13,6 @@ namespace AOServer
             this.client = client;
             stream = this.client.GetStream();
             ClientManager.new_client(this);
-
-            
-
         }
 
         public bool isConnected()
@@ -62,8 +52,5 @@ namespace AOServer
             }
             return Encoding.UTF8.GetString(buffer, 0, byte_count);
         }
-
-
-
     }
 }

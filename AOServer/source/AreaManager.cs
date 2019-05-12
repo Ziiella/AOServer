@@ -2,9 +2,9 @@
 using System.IO;
 using System.Collections.Generic;
 using YamlDotNet.RepresentationModel;
-using static AOServer.ServerAO.Data.ClientManager;
+using static AOServer.ClientManager;
 
-namespace AOServer.ServerAO.Data
+namespace AOServer
 {
     class AreaManager
     {

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AOServer.ServerAO.Data;
 using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using YamlDotNet;
 using YamlDotNet.RepresentationModel;
 
-namespace AOServer.ServerAO
+namespace AOServer
 {
     class Config
     {

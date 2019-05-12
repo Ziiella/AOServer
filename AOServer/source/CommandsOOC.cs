@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using static AOServer.ServerAO.Data.ClientManager;
+using static AOServer.ClientManager;
 
 namespace AOServer
 {
@@ -71,7 +71,7 @@ namespace AOServer
                 c.send_host_message("You must specify a character name.");
                 return;
             }
-            int cid = ServerAO.Server.get_char_id_by_name(args[1]);
+            int cid = Server.get_char_id_by_name(args[1]);
             try
             {
                 c.change_character(cid, c.is_mod);
@@ -137,7 +137,7 @@ namespace AOServer
             switch (args[1].ToLower())
             {
                 case "server":
-                    ServerAO.Server.lockdown();
+                    Server.lockdown();
                     break;
 
                 case "area":

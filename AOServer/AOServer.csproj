@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="source\AOProtocol.cs" />
+    <Compile Include="source\Command.cs" />
     <Compile Include="source\CommandsOOC.cs" />
     <Compile Include="source\Exceptions.cs" />
     <Compile Include="source\FantaCrypt.cs" />

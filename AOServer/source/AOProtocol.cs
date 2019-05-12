@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static AOServer.ServerAO.Data.ClientManager;
-using AOServer.ServerAO.Data;
-using AOServer.ServerAO;
+using static AOServer.ClientManager;
 
 namespace AOServer
 {
@@ -138,22 +134,22 @@ namespace AOServer
             askchaa#%*/
             string[] args = new string[3];
 
-            args[0] = ServerAO.Config.char_list.Count.ToString(); //Char count
+            args[0] = Config.char_list.Count.ToString(); //Char count
             args[1] = 0.ToString(); //Evidence count
-            args[2] = ServerAO.Config.music_list.Count.ToString(); //Music Count
+            args[2] = Config.music_list.Count.ToString(); //Music Count
             c.send_command("SI", args);
         }
 
         public static void net_cmd_rc(Client c)
         {
             /*Asks for the whole character list(AO2)  AC#% */
-            c.send_command("SC", ServerAO.Config.char_list);
+            c.send_command("SC", Config.char_list);
         }
 
         public static void net_cmd_rm(Client c)
         {
             /* Asks for the whole music list(AO2) AM#% */
-            c.send_command("SM", ServerAO.Config.music_list_ao2);
+            c.send_command("SM", Config.music_list_ao2);
         }
 
         public static void net_cmd_rd(Client c)
@@ -161,7 +157,7 @@ namespace AOServer
             /*Asks for server metadata(charscheck, motd etc.) and a DONE#% signal(also best packet) RD#% */
 
             c.send_done();
-            if (ServerAO.Config.announce_areas)
+            if (Config.announce_areas)
                 c.send_area_list();
             c.send_motd();
         }

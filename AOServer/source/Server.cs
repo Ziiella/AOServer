@@ -7,9 +7,8 @@ using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
-using AOServer.ServerAO.Data;
 
-namespace AOServer.ServerAO
+namespace AOServer
 {
     class Server
     {
