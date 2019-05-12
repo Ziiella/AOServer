@@ -1,0 +1,1435 @@
+- area: 0-Lobby
+  background: Class Trial Debate Room DR2-1_HD
+  bglock: true
+  evidence_mod: FFA
+  locking_allowed: false
+  iniswap_allowed: true
+  banning_words: true
+- area: 1-Moderator Lounge
+  background: Headmaster's Office_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 2-Class Trial Room
+  background: Class Trial Debate Room DR2-3_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 3-Class Trial Room 2
+  background: Class Trial Debate Room DR2-5_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 4-Mock Trial Room
+  background: Class Trial Debate Room DR1-3_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 5-Parlor
+  background: Principal's Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: false
+  iniswap_allowed: true
+- area: 6-OOC Game Room
+  background: Game Room_HD
+  bglock: false
+  evidence_mod: FFA
+  locking_allowed: false
+  iniswap_allowed: true  
+- area: 7-Testing Labs
+  background: Bio Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: false
+  iniswap_allowed: true 
+- area: 8-OOC Meeting Room
+  background: Headmaster's Office_HD
+  bglock: false
+  evidence_mod: FFA
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 9-OOC Venting Room
+  background: VLR Biotope Vents_HD
+  bglock: false
+  evidence_mod: FFA
+  locking_allowed: false
+  iniswap_allowed: true
+- area: 10-The Stained Thinkery
+  background: Class Trial Debate Room DR2-1_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: false
+  iniswap_allowed: true
+- area: 11-Less Stained Thinkery
+  background: Class Trial Debate Room DR2-6_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: false
+  iniswap_allowed: true 
+- area: 12-Love Hotel
+  background: V3 Love Hotel_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 13-Love Hotel 2
+  background: V3 Love Hotel_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true 
+- area: 14-Love Hotel 3
+  background: V3 Love Hotel_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+- area: 15-Entrance
+  background: Entrance_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 16-Hallway 1
+  background: Hallway 1_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 17-Boys' Restroom Hallway 1
+  background: Boys' Restroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 18-Girls' Restroom Hallway 1
+  background: Girls' Restroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 19-AV Room
+  background: AV Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 20-School Store
+  background: School Store_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 21-Class Room 1
+  background: Class Room 1_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 22-Nurse's Office
+  background: Nurse's Office_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 23-Door to Despair
+  background: Door to Despair_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 24-Gym Hallway
+  background: Gym Hallway_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 25-Gym 
+  background: Gym_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 26-Dorm Core
+  background: Dorm Core_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 27-Laundry Room
+  background: Laundry Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 28-Storage Room
+  background: Storage Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 29-Bath House
+  background: Bath House_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 30-Sauna
+  background: Sauna_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 31-Sauna 2
+  background: Sauna 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 32-Dining Hall
+  background: Dining Hall_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 33-Kitchen
+  background: Kitchen_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 34-Dorm Hallway
+  background: Dorm Hallway_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 35-Boys' Restroom
+  background: Boys' Restroom (Dorms)_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 36-Girls' Restroom
+  background: Girls' Restroom (Dorms)_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 37-Incinerator
+  background: Incinerator_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 38-Dorm Room 1
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 39-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 40-Dorm Room 2
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 41-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 42-Dorm Room 3
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 43-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 44-Dorm Room 4
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 45-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 46-Dorm Room 5
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 47-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 48-Dorm Room 6
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 49-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 50-Dorm Room 7
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 51-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 52-Dorm Room 8
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 53-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 54-Dorm Room 9
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 55-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 56-Dorm Room 10
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 57-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 58-Dorm Room 11
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 59-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 60-Dorm Room 12
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 61-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 62-Dorm Room 13
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 63-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 64-Dorm Room 14
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 65-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 66-Dorm Room 15
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 67-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 68-Dorm Room 16
+  background: Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 69-Dorm Room Bathroom
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 70-Ruined Hallway
+  background: Ruined Hallway_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 71-Ruined Locker Room
+  background: Ruined Locker Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 72-Ruined Room
+  background: Ruined Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 73-Principal's Room
+  background: Principal's Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 74-Hallway 2
+  background: Hallway 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 75-Boys' Restroom Hallway 2
+  background: Boys' Restroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 76-Girls' Restroom Hallway 2
+  background: Girls' Restroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 77-Outside Locker Rooms
+  background: Outside Locker Rooms_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 78-Male Work Out Room
+  background: Male Work Out Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 79-Female Work Out Room
+  background: Female Work Out Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 80-Pool
+  background: Pool _HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 81-Class Room 2
+  background: Class Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 82-Hallway 3
+  background: Hallway 3_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 83-Library
+  background: Library_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 84-Library Side Room
+  background: Library Side Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 85-Classroom 3
+  background: Classroom 3_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 86-Hallway 4
+  background: Hallway 4_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 87-Classroom 4
+  background: Classroom 4_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 88-Game Room
+  background: Game Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 89-Hallway 5
+  background: Hallway 5_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 90-Art Room
+  background: Art Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 91-Art Room Storage
+  background: Art Room Storage_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 92-Hallway 6
+  background: Hallway 6_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 93-Air Purifier Room
+  background: Air Purifier Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 94-Equipment Room
+  background: Equipment Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 95-Hallway 7
+  background: Hallway 7_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 96-Music Hall
+  background: Music Hall_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 97-Boys' Restroom Hallway 7
+  background: Boys' Restroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 98-Girls' Restroom Hallway 7
+  background: Girls' Restroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 99-Classroom 5
+  background: Classroom 5_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 100-Classroom 6
+  background: Classroom 6_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 101-Botany Office
+  background: Botony Office_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 102-Chemical Lab
+  background: Chemical Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 103-Headmaster's Office
+  background: Headmaster's Office_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 104-Data Room
+  background: Data Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 105-Computer Room
+  background: Computer Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 106-Hallway 8
+  background: Hallway 8_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 107-Bio Lab
+  background: Bio Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 108-Bloody Classroom
+  background: Bloody Classroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 109-Classroom 7
+  background: Classroom 7_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 110-Dojo
+  background: Dojo_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 111-Botanical Garden
+  background: Botanical Garden_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 112-Tool Shed
+  background: Tool Shed_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 113-Alternative Universe
+  background: Class Trial Debate Room DR2-3_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false 
+- area: 114-Courtyard AU
+  background: V3 Courtyard_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 115-Dormitory AU 
+  background: V3 Dormitory_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 116-Dorm Room 1 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 117-Dorm Room 1 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 118-Dorm Room 2 AU AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 119-Dorm Room 2 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 120-Dorm Room 3 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 121-Dorm Room 3 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 122-Dorm Room 4 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 123-Dorm Room 4 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 124-Dorm Room 5 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 125-Dorm Room 5 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 126-Dorm Room 6 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 127-Dorm Room 6 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 128-Dorm Room 7 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 129-Dorm Room 7 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 130-Dorm Room 8 AU
+  background: V3 Dorm Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 131-Dorm Room 8 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 132-Dorm Room 9 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 133-Dorm Room 9 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 134-Dorm Room 10 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 135-Dorm Room 10 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 136-Dorm Room 11 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 137-Dorm Room 11 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 138-Dorm Room 12 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 139-Dorm Room 12 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 140-Dorm Room 13 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 141-Dorm Room 13 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 142-Dorm Room 14 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 143-Dorm Room 14 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 144-Dorm Room 15 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 145-Dorm Room 15 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 146-Dorm Room 16 AU
+  background: V3 Dorm Room 2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 147-Dorm Room 16 Bathroom AU
+  background: Dorm Room Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 148-Boiler Room AU
+  background: V3 Boiler Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 149-Underground Passage AU
+  background: V3 Underground Passage_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 150-Casino Exterior AU
+  background: V3 Casino Exterior_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 151-Casino First Floor AU
+  background: V3 Casino 1F_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 152-Casino Basement Floor AU
+  background: V3 Casino BF_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 153-Love Suite AU
+  background: V3 Love Hotel_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 154-Pool AU
+  background: V3 Pool_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 155-Lower Courtyard AU
+  background: V3 Lower Courtyard_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 156-Aikido Master Lab AU
+  background: V3 Tenkos Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 157-Shrine of Judgment AU
+  background: V3 Shrine of Judgment_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 158-Robot Lab AU
+  background: V3 Keebos Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 159-Inventor Lab AU
+  background: V3 Mius Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 160-Cyber Courtyard AU
+  background: V3 Cyber Courtyard_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 161-Exisal Hangar Exterior AU
+  background: V3 Hangar Exterior_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 162-Exisal Hangar AU
+  background: V3 Exisal Hangar_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 163-Exisal Hangar Bathroom AU
+  background: V3 Hangar Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 164-Academy Entrance AU
+  background: V3 Academy Entrance_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 165-1F Hallway AU
+  background: V3 Hallway 1F_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 166-Classroom A AU
+  background: V3 Classroom A_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 167-Boys Bathroom AU
+  background: V3 Boys Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 168-Girls Bathroom AU
+  background: V3 Girls Bathroom_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 169-Dining Hall AU
+  background: V3 Dining Hall_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 170-Kitchen AU
+  background: V3 Kitchen_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 171-Warehouse AU
+  background: V3 Warehouse_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 172-School Store AU
+  background: V3 School Store_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 173-Gym Hallway AU
+  background: V3 Hallway 1F-2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 174-Magician Lab AU
+  background: V3 Himikos Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 175-Spiral Staircase AU
+  background: V3 Spiral Staircase_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 176-Astronaut Lab AU
+  background: V3 Kaitos Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 177-Gym AU
+  background: V3 Gym_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 178-Basement Hallway AU
+  background: V3 Basement Hallway_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 179-AV Room AU
+  background: V3 AV Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 180-Game Room AU
+  background: V3 Game Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 181-Supreme Leader Lab AU
+  background: V3 Kokichis Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 182-Library AU
+  background: V3 Library_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 183-Motherkuma Room AU
+  background: V3 Motherkuma Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 184-2F Hallway AU
+  background: V3 Hallway 2F_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 185-Entomologist Lab AU
+  background: V3 Gontas Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 186-Maid Lab AU
+  background: V3 Kirumis Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 187-Classroom B AU
+  background: V3 Classroom B_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 188-Classroom C AU
+  background: V3 Classroom C_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 189-Pianist Lab AU
+  background: V3 Kaedes Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 190-3F Hallway AU
+  background: V3 Hallway 3F_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 191-Relaxation Space AU
+  background: V3 Hallway 3F-2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 192-Tennis Pro Lab AU
+  background: V3 Ryomas Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 193-Tennis Pro Lab Shower Room AU
+  background: V3 Ryomas Lab Shower Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 194-Assassin Lab AU
+  background: V3 Makis Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 195-4F Hallway AU
+  background: V3 Hallway 4F_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 196-Artist Lab AU
+  background: V3 Angies Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 197-Anthropologist Lab AU
+  background: V3 Korekiyos Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 198-Empty Room 1 AU
+  background: V3 Empty Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 199-Empty Room 2 AU
+  background: V3 Empty Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 200-Empty Room 3 AU
+  background: V3 Empty Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 201-Computer Room AU
+  background: V3 Computer Room_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 202-5F Hallway AU
+  background: V3 Hallway 5F_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 203-Cosplayer Lab AU
+  background: V3 Tsumugis Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 204-5F Hallway Columns AU
+  background: V3 Hallway 5F-2_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 205-Adventurer Lab AU
+  background: V3 Rantaros Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false
+- area: 206-Detective Lab AU
+  background: V3 Shuichis Lab_HD
+  bglock: false
+  evidence_mod: CM
+  locking_allowed: true
+  iniswap_allowed: true
+  rp_getareas_allowed: false

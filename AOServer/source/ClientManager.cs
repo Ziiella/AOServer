@@ -74,7 +74,6 @@ namespace AOServer.ServerAO.Data
 
             public void send_raw_message(string msg)
             {
-                Console.WriteLine($"Sending raw response: [{msg}]");
                 transport.Write(Encoding.UTF8.GetBytes(msg));
             }
 
@@ -156,7 +155,7 @@ namespace AOServer.ServerAO.Data
             {
                 if (!Server.is_valid_char_id(char_id))
                 {
-                    //ClientError('Invalid Character ID.')
+                    throw new Exceptions.ClientError(this, "Invalid Character ID.");
                 }
 
                 if (!area.is_char_avaliable(char_id))
@@ -175,8 +174,7 @@ namespace AOServer.ServerAO.Data
                         }
                         else
                         {
-                            //aise ClientError('Character not available.')
-                            return;
+                            throw new Exceptions.ClientError(this, "Character not available.");
                         }
                     }
                 }
@@ -375,7 +373,19 @@ namespace AOServer.ServerAO.Data
 
             public void auth_mod(string password)
             {
+                if (is_mod)
+                {
+                    throw new Exceptions.ClientError(this, "Aready logged in.");
+                }
 
+                if (password == "ReplaceMe")
+                {
+                    is_mod = true;
+                }
+                else
+                {
+                    throw new Exceptions.ClientError(this, "Invalid password.");
+                }
             }
 
             public void auth_cm(string password)
@@ -448,14 +458,13 @@ namespace AOServer.ServerAO.Data
             clients_list.Add(c);
 
             
-            Console.WriteLine("Client connected!");
             Thread t = new Thread(clientLoop);
             t.Start(c);
         }
 
         public static void remove_client(Client client)
         {
-
+            clients_list.Remove(client);
         }
 
         public static void get_targets(Client client, object key, string value, bool local = false)
@@ -489,7 +498,6 @@ namespace AOServer.ServerAO.Data
             c.disconnect();
             c.area.remove_client(c);
             remove_client(c);
-            Console.WriteLine("User has disconnected.");
         }
 
 

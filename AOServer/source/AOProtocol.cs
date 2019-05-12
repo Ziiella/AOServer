@@ -11,6 +11,8 @@ namespace AOServer
 {
     class AOProtocol
     {
+        static Dictionary<string, Func<Client, string[]>>  net_cmds = new Dictionary<string, Func<Client, string[]>>();
+
 
 
         public static void data_received(string msg, Client c)
@@ -26,7 +28,6 @@ namespace AOServer
                 string[] spl = msg.Split('#');
                 msg = $"{FantaCrypt.fanta_decrypt(spl[0])}#{spl[1]}#%";
             }
-            Console.WriteLine(msg);
             string[] data = get_messages(msg);
 
             switch (data[0])
@@ -87,11 +88,16 @@ namespace AOServer
 
         #region net_cmd_
 
+
         public static void net_cmd_hi(Client c, string[] args)
         {
             c.hdid = args[1];
+
+            Logger.log_server($"Connected. HDID: {c.hdid}.");
             c.send_command("ID", new string[] { $"{c.id}", $"{Program.get_server_software()}", $"{Program.get_version_string()}" });
             c.send_command("PN", new string[] { $"{Server.get_player_count() - 1}", $"{Config.PlayerLimit}" });
+
+
         }
 
         public static void net_cmd_id(Client c, string[] args)
@@ -218,7 +224,7 @@ namespace AOServer
             {
                 args[2] = args[2].Substring(1);
                 string[] spl = args[2].Split(' ');
-                CommandsOOC.ooc_command_send(c, spl);
+                CommandsOOC.ooc_command(c, spl);
             }
             else
             {
@@ -226,6 +232,8 @@ namespace AOServer
                 {
                     args[2] = c.disemvowel_message(args[2]);
                 }
+                Logger.log_server($"[OOC][{c.area.id}][{c.get_char_name()}][{c.name}]{args[2]}");
+                
                 c.area.send_command("CT", new string[] { c.name, args[2] } );
 
             }
@@ -352,11 +360,16 @@ namespace AOServer
 
             c.area.send_command("MS", newargs);
 
+            Logger.log_server($"[IC][{c.area.id}][{c.get_char_name()}]{msg}");
+
             //self.client.area.set_next_msg_delay(len(msg))
-            //logger.log_server('[IC][{}][{}]{}'.format(self.client.area.id, self.client.get_char_name(), msg), self.client)
 
             //if self.client.area.is_recording:
             //    self.client.area.recorded_messages.append(args)
+
+            //if color == 2:
+            //logger.log_mod('[IC][Redtext][{}][{}][{}]{}'.format(self.client.area.id, self.client.area.status,
+            //                                                    self.client.get_char_name(), msg), self.client)
         }
 
         public static void net_cmd_mc(Client c, string[] args)
@@ -409,14 +422,7 @@ namespace AOServer
                 c.area.play_music(args[1], int.Parse(args[2]));
                 //    self.client.area.play_music(name, self.client.char_id, length)
                 //    self.client.area.add_music_playing(self.client, name)
-                //    logger.log_server('[{}][{}]Changed music to {}.'
-                //                      .format(self.client.area.id, self.client.get_char_name(), name), self.client)
-                //except ServerError:
-                //    return
-
-                //except ClientError as ex:
-
-                //self.client.send_host_message(ex)
+                Logger.log_server($"[{c.area.id}][{c.get_char_name()}]Changed music to {args[1]}.");
 
 
 

@@ -26,7 +26,6 @@ namespace AOServer
 
                 //short num = BitConverter.ToInt16(item, 0);
                 data_bytes.Add(intValue);
-                Console.WriteLine(intValue);
             }
 
             int key = CRYPT_KEY;

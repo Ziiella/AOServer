@@ -46,18 +46,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AOProtocol.cs" />
-    <Compile Include="CommandsOOC.cs" />
-    <Compile Include="Exceptions.cs" />
-    <Compile Include="FantaCrypt.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="source\AOProtocol.cs" />
+    <Compile Include="source\CommandsOOC.cs" />
+    <Compile Include="source\Exceptions.cs" />
+    <Compile Include="source\FantaCrypt.cs" />
+    <Compile Include="source\Logger.cs" />
+    <Compile Include="source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerAO\Data\AreaManager.cs" />
-    <Compile Include="ServerAO\Config.cs" />
-    <Compile Include="ServerAO\Data\ClientManager.cs" />
-    <Compile Include="ServerAO\Server.cs" />
-    <Compile Include="WebSocket.cs" />
-    <Compile Include="YAML.cs" />
+    <Compile Include="source\AreaManager.cs" />
+    <Compile Include="source\Config.cs" />
+    <Compile Include="source\ClientManager.cs" />
+    <Compile Include="source\Server.cs" />
+    <Compile Include="source\WebSocket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

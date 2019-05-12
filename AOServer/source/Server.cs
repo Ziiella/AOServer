@@ -50,6 +50,7 @@ namespace AOServer.ServerAO
 
         public Server()
         {
+            Logger.Init(false, false);
             Config.Init();
             AreaManager.load_areas();
             Config.build_music_list_ao2();
@@ -97,8 +98,15 @@ namespace AOServer.ServerAO
 
         public static int get_char_id_by_name(string name)
         {
+            for (int i = 0; i < Config.char_list.Count(); i++)
+            {
+                if (Config.char_list[i] == name)
+                {
+                    return i;
+                }
+            }
 
-            return 0;
+            return 999;
         }
 
         public static string get_song_data(int music)
